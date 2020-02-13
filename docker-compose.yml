@@ -1,0 +1,17 @@
+version: '3.6'
+
+networks:
+  fastfeet-network:
+    driver: bridge
+
+services:
+  fastfeet-api:
+    build: .
+    volumes:
+      - .:/home/node/api
+    networks:
+      - fastfeet-network
+    container_name: fastfeet-api
+    command: yarn dev
+    ports:
+      - 3333:3333
