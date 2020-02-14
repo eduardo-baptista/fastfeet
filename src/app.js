@@ -3,6 +3,9 @@ import 'dotenv/config';
 import express from 'express';
 import 'express-async-errors';
 
+// start database connection
+import './database';
+
 import routes from './routes';
 
 class App {
