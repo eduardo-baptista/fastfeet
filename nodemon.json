@@ -1,6 +1,6 @@
 {
-  "execMap": {
-    "js": "sucrase-node"
-  },
-  "ignore": ["__tests__"]
+  "watch": ["src"],
+  "ext": ".ts,.js",
+  "ignore": [],
+  "exec": "node --inspect -r tsconfig-paths/register -r sucrase/register"
 }

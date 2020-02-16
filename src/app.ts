@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-import express from 'express';
+import express, { Application } from 'express';
 import 'express-async-errors';
 
 // start database connection
@@ -9,6 +9,8 @@ import './database';
 import routes from './routes';
 
 class App {
+  public server: Application;
+
   constructor() {
     this.server = express();
 
@@ -16,11 +18,11 @@ class App {
     this.routes();
   }
 
-  middleware() {
+  middleware(): void {
     this.server.use(express.json());
   }
 
-  routes() {
+  routes(): void {
     this.server.use(routes);
   }
 }
