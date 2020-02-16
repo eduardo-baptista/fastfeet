@@ -26,6 +26,7 @@ module.exports = {
     'class-methods-use-this': 'off',
     'no-param-reassign': 'off',
     camelcase: 'off',
+    '@typescript-eslint/camelcase': 'off',
     'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
     'import/extensions': [
       'error',

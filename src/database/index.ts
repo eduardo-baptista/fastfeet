@@ -1,8 +1,11 @@
-import { Model, Sequelize, Options } from 'sequelize';
+import { Sequelize, Options } from 'sequelize';
 
 import databaseConfig from '@config/database';
 
-const models: Model[] = [];
+// models
+import User from '@models/User';
+
+const models = [User];
 
 class DataBase {
   private connection: Sequelize;
@@ -14,9 +17,8 @@ class DataBase {
   init(): void {
     this.connection = new Sequelize(databaseConfig as Options);
 
-    models
-      .map(model => model.init(this.connection))
-      .map(model => model.associate && model.associate(this.connection.models));
+    models.map(model => model.initialize(this.connection));
+    // .map(model => model.associate && model.associate(this.connection.models));
   }
 }
 
