@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import './bootstrap.js';
 
 import express, { Application } from 'express';
 import 'express-async-errors';
