@@ -8,7 +8,7 @@ import User from '@models/User';
 const models = [User];
 
 class DataBase {
-  private connection: Sequelize;
+  public connection: Sequelize;
 
   constructor() {
     this.init();
