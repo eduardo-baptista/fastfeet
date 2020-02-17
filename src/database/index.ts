@@ -4,8 +4,9 @@ import databaseConfig from '@config/database';
 
 // models
 import User from '@models/User';
+import Recipient from '@models/Recipient';
 
-const models = [User];
+const models = [User, Recipient];
 
 class DataBase {
   public connection: Sequelize;
