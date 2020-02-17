@@ -15,6 +15,7 @@
       "@middleware/*": ["app/middleware/*"],
       "@models/*": ["app/models/*"],
       "@controllers/*": ["app/controllers/*"],
+      "@validators/*": ["app/validators/*"],
       "@tests-utils/*": ["__tests__/utils/*"]
     },
     "typeRoots": ["node_modules/@types", "src/@types"],

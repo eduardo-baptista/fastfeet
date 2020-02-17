@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import * as Yup from 'yup';
 
-const AuthStore: RequestHandler = async (
+const SessionStore: RequestHandler = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -24,4 +24,4 @@ const AuthStore: RequestHandler = async (
   }
 };
 
-export default AuthStore;
+export default SessionStore;
