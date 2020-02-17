@@ -1,7 +1,8 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
+import bcrypt from 'bcryptjs';
 
 class User extends Model {
-  public id!: number;
+  public readonly id!: number;
 
   public name!: string;
 
@@ -25,6 +26,16 @@ class User extends Model {
       },
       { sequelize }
     );
+
+    this.addHook('beforeSave', async (user: User) => {
+      if (user.password) {
+        user.password_hash = await bcrypt.hash(user.password, 8);
+      }
+    });
+  }
+
+  public checkPassword(password: string): Promise<boolean> {
+    return bcrypt.compare(password, this.password_hash);
   }
 }
 

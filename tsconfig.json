@@ -13,7 +13,8 @@
     "paths": {
       "@config/*": ["config/*"],
       "@middleware/*": ["app/middleware/*"],
-      "@models/*": ["app/models/*"]
+      "@models/*": ["app/models/*"],
+      "@controllers/*": ["app/controllers/*"]
     },
     "typeRoots": ["node_modules/@types", "src/@types"],
     "allowSyntheticDefaultImports": true,
