@@ -9,6 +9,9 @@ import SessionStoreSchema, { SessionStore } from '@validators/SessionStore';
 import RecipientStoreSchema, {
   RecipientStore,
 } from '@validators/RecipientStore';
+import RecipientUpdateSchema, {
+  RecipientUpdate,
+} from '@validators/RecipientUpdate';
 
 // middlewares
 import authMiddleware from '@middleware/auth';
@@ -30,6 +33,10 @@ routes.post(
   validationMiddleware<RecipientStore>(RecipientStoreSchema),
   RecipientController.store
 );
-routes.put('/recipients/:id', RecipientController.update);
+routes.put(
+  '/recipients/:id',
+  validationMiddleware<RecipientUpdate>(RecipientUpdateSchema),
+  RecipientController.update
+);
 
 export default routes;

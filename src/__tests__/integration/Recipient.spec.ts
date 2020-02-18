@@ -77,4 +77,15 @@ describe('Recipients', () => {
 
     expect(response.status).toBe(404);
   });
+
+  // it('should be able to list all recipients', async () => {
+  //   const numOfRecipients = 5;
+  //   await factories.createMany('Recipient', numOfRecipients);
+
+  //   const response = await request(app)
+  //     .get('/recipients')
+  //     .set('Authorization', token);
+
+  //   expect(response.body.length).toBe(numOfRecipients);
+  // });
 });
