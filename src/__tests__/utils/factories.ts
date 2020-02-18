@@ -14,7 +14,7 @@ factory.define('Recipient', Recipient, {
   name: faker.name.findName(),
   street: faker.address.streetName(),
   number: faker.random.number(),
-  complement: faker.lorem.words(40),
+  complement: faker.lorem.words(4),
   state: faker.address.state(),
   city: faker.address.city(),
   cep: faker.address.zipCode('########'),

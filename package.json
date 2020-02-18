@@ -19,10 +19,10 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "pretest": "set NODE_ENV=test&& sequelize db:migrate",
-    "test": "set NODE_ENV=test&& jest",
+    "test": "set NODE_ENV=test&& jest -i",
     "posttest": "set NODE_ENV=test&& sequelize db:migrate:undo:all",
     "pretest-lx": "NODE_ENV=test sequelize db:migrate",
-    "test-lx": "NODE_ENV=test jest",
+    "test-lx": "NODE_ENV=test jest -i",
     "posttest-lx": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "devDependencies": {

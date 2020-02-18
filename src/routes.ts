@@ -30,5 +30,6 @@ routes.post(
   validationMiddleware<RecipientStore>(RecipientStoreSchema),
   RecipientController.store
 );
+routes.put('/recipients/:id', RecipientController.update);
 
 export default routes;

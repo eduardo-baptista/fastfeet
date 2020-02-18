@@ -1,4 +1,5 @@
 import request from 'supertest';
+import faker from 'faker';
 
 import truncate from '@tests-utils/truncate';
 import factories from '@tests-utils/factories';
@@ -12,9 +13,14 @@ describe('Recipients', () => {
   let token: string;
 
   beforeEach(() => {
-    return generateToken().then(tk => {
-      token = tk;
-    });
+    const promise = new Promise(resolve =>
+      generateToken().then(tk => {
+        token = tk;
+        resolve();
+      })
+    );
+
+    return promise;
   });
 
   beforeEach(() => {
@@ -41,5 +47,34 @@ describe('Recipients', () => {
 
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty('messages');
+  });
+
+  it('should be able to edit values from a criated recipient', async () => {
+    const { id } = await factories.create<RecipientInterface>('Recipient');
+    const recipientValuesToEdit = await factories.attrs<RecipientInterface>(
+      'Recipient'
+    );
+
+    const response = await request(app)
+      .put(`/recipients/${id}`)
+      .set('Authorization', token)
+      .send(recipientValuesToEdit);
+
+    expect(response.body).toMatchObject(recipientValuesToEdit);
+  });
+
+  it('shoud return error when does not find recipient to edit', async () => {
+    const id = faker.random.number();
+
+    const recipientValuesToEdit = await factories.attrs<RecipientInterface>(
+      'Recipient'
+    );
+
+    const response = await request(app)
+      .put(`/recipients/${id}`)
+      .set('Authorization', token)
+      .send(recipientValuesToEdit);
+
+    expect(response.status).toBe(404);
   });
 });
