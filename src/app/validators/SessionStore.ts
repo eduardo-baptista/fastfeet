@@ -1,27 +1,12 @@
-import { Request, Response, NextFunction, RequestHandler } from 'express';
 import * as Yup from 'yup';
 
-const SessionStore: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const schema = Yup.object().shape({
-      email: Yup.string()
-        .email()
-        .required(),
-      password: Yup.string().required(),
-    });
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email()
+    .required(),
+  password: Yup.string().required(),
+});
 
-    await schema.validate(req.body, { abortEarly: false });
+export type SessionStore = Yup.InferType<typeof schema>;
 
-    return next();
-  } catch (err) {
-    return res
-      .status(400)
-      .json({ error: 'validation failed', messages: err.inner });
-  }
-};
-
-export default SessionStore;
+export default schema;

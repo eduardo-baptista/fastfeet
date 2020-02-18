@@ -30,11 +30,11 @@ describe('Recipients', () => {
 
     const recipientsCount = await Recipient.count();
 
-    expect(recipientsCount).toBe(1);
     expect(response.status).toBe(201);
+    expect(recipientsCount).toBe(1);
   });
 
-  it('sould return error when values was not provided on create', async () => {
+  it('should return error when values was not provided on create', async () => {
     const response = await request(app)
       .post('/recipients')
       .set('Authorization', token);

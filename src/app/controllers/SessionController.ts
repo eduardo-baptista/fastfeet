@@ -5,14 +5,11 @@ import User from '@models/User';
 
 import auhtConfig from '@config/auth';
 
-interface UserLogin {
-  email: string;
-  password: string;
-}
+import { SessionStore } from '@validators/SessionStore';
 
 class SessionController {
   public async store(req: Request, res: Response): Promise<Response> {
-    const { email, password } = req.body as UserLogin;
+    const { email, password } = req.body as SessionStore;
 
     const user = await User.findOne({ where: { email } });
 
