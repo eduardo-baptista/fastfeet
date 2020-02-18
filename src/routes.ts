@@ -28,6 +28,7 @@ routes.post(
 // auth
 routes.use(authMiddleware);
 
+routes.get('/recipients', RecipientController.index);
 routes.post(
   '/recipients',
   validationMiddleware<RecipientStore>(RecipientStoreSchema),
@@ -38,5 +39,6 @@ routes.put(
   validationMiddleware<RecipientUpdate>(RecipientUpdateSchema),
   RecipientController.update
 );
+routes.delete('/recipients/:id', RecipientController.delete);
 
 export default routes;

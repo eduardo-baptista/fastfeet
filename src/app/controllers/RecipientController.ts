@@ -14,11 +14,31 @@ class RecipientController {
 
     const recipient = await Recipient.findByPk(id);
 
-    if (!recipient) return res.status(404).json({ error: 'User did not find' });
+    if (!recipient)
+      return res.status(404).json({ error: 'Recipient did not find' });
 
     await recipient.update(req.body);
 
     return res.json(recipient);
+  }
+
+  async index(req: Request, res: Response): Promise<Response> {
+    const recipients = await Recipient.findAll();
+
+    return res.json(recipients);
+  }
+
+  async delete(req: Request, res: Response): Promise<Response | void> {
+    const { id } = req.params;
+
+    const recipient = await Recipient.findByPk(id);
+
+    if (!recipient)
+      return res.status(404).json({ error: 'Recipient did not find' });
+
+    await recipient.destroy();
+
+    return res.status(204).end();
   }
 }
 

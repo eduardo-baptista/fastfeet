@@ -78,14 +78,37 @@ describe('Recipients', () => {
     expect(response.status).toBe(404);
   });
 
-  // it('should be able to list all recipients', async () => {
-  //   const numOfRecipients = 5;
-  //   await factories.createMany('Recipient', numOfRecipients);
+  it('should be able to list all recipients', async () => {
+    const numOfRecipients = 5;
+    await factories.createMany('Recipient', numOfRecipients);
 
-  //   const response = await request(app)
-  //     .get('/recipients')
-  //     .set('Authorization', token);
+    const response = await request(app)
+      .get('/recipients')
+      .set('Authorization', token);
 
-  //   expect(response.body.length).toBe(numOfRecipients);
-  // });
+    expect(response.body.length).toBe(numOfRecipients);
+  });
+
+  it('should be able to delete a recipient', async () => {
+    const { id } = await factories.create<RecipientInterface>('Recipient');
+
+    const response = await request(app)
+      .del(`/recipients/${id}`)
+      .set('Authorization', token);
+
+    const numberOfRecipients = await Recipient.count();
+
+    expect(response.status).toBe(204);
+    expect(numberOfRecipients).toBe(0);
+  });
+
+  it('should return error when does not find a recipient to delete', async () => {
+    const id = faker.random.number();
+
+    const response = await request(app)
+      .del(`/recipients/${id}`)
+      .set('Authorization', token);
+
+    expect(response.status).toBe(404);
+  });
 });
