@@ -1,5 +1,18 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
 
+export interface RecipientInterface {
+  readonly id: number;
+  name: string;
+  street: string;
+  number: number;
+  complement: string;
+  state: string;
+  city: string;
+  cep: string;
+  readonly created_at: Date;
+  readonly updated_at: Date;
+}
+
 class Recipient extends Model {
   public readonly id!: number;
 

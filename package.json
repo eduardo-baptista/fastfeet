@@ -20,7 +20,10 @@
     "dev": "nodemon src/server.ts",
     "pretest": "set NODE_ENV=test&& sequelize db:migrate",
     "test": "set NODE_ENV=test&& jest",
-    "posttest": "set NODE_ENV=test&& sequelize db:migrate:undo:all"
+    "posttest": "set NODE_ENV=test&& sequelize db:migrate:undo:all",
+    "pretest-lx": "NODE_ENV=test sequelize db:migrate",
+    "test-lx": "NODE_ENV=test jest",
+    "posttest-lx": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

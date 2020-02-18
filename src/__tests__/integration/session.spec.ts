@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import truncate from '@tests-utils/truncate';
 import factories from '@tests-utils/factories';
 
-import User from '@models/User';
+import { UserInterface } from '@models/User';
 
 import app from '../../app';
 
@@ -14,7 +14,7 @@ describe('Session', () => {
   });
 
   it('should be able to login with email and password', async () => {
-    const user = await factories.create<User>('User');
+    const user = await factories.create<UserInterface>('User');
 
     const { email, password } = user;
 
@@ -29,7 +29,7 @@ describe('Session', () => {
   });
 
   it('should return error when does not find a user', async () => {
-    const user = await factories.attrs<User>('User');
+    const user = await factories.attrs<UserInterface>('User');
 
     const { email, password } = user;
 
@@ -41,7 +41,7 @@ describe('Session', () => {
   });
 
   it('should return error when password does not match ', async () => {
-    const user = await factories.create<User>('User');
+    const user = await factories.create<UserInterface>('User');
 
     const { email, password } = user;
 
@@ -60,7 +60,7 @@ describe('Session', () => {
   });
 
   it('should return a valid token on login', async () => {
-    const user = await factories.create<User>('User');
+    const user = await factories.create<UserInterface>('User');
 
     const { email, password } = user;
 

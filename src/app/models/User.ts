@@ -1,6 +1,16 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
+export interface UserInterface {
+  readonly id: number;
+  name: string;
+  email: string;
+  password: string;
+  password_hash: string;
+  readonly created_at: Date;
+  readonly updated_at: Date;
+}
+
 class User extends Model {
   public readonly id!: number;
 
