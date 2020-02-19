@@ -1,5 +1,7 @@
-import { Sequelize, Model, DataTypes } from 'sequelize';
+import { Sequelize, DataTypes } from 'sequelize';
 import bcrypt from 'bcryptjs';
+
+import { ModelImplementation } from '@typings/types';
 
 export interface UserInterface {
   readonly id: number;
@@ -11,7 +13,7 @@ export interface UserInterface {
   readonly updated_at: Date;
 }
 
-class User extends Model {
+class User extends ModelImplementation {
   public readonly id!: number;
 
   public name!: string;

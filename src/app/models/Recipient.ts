@@ -1,4 +1,6 @@
-import { Sequelize, Model, DataTypes } from 'sequelize';
+import { Sequelize, DataTypes } from 'sequelize';
+
+import { ModelImplementation } from '@typings/types';
 
 export interface RecipientInterface {
   readonly id: number;
@@ -13,7 +15,7 @@ export interface RecipientInterface {
   readonly updated_at: Date;
 }
 
-class Recipient extends Model {
+class Recipient extends ModelImplementation {
   public readonly id!: number;
 
   public name!: string;

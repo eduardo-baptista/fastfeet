@@ -11,6 +11,7 @@
     "moduleResolution": "node",
     "baseUrl": "./src",
     "paths": {
+      "@typings/*": ["app/typings/*"],
       "@config/*": ["config/*"],
       "@middleware/*": ["app/middleware/*"],
       "@models/*": ["app/models/*"],

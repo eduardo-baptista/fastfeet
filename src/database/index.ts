@@ -5,8 +5,10 @@ import databaseConfig from '@config/database';
 // models
 import User from '@models/User';
 import Recipient from '@models/Recipient';
+import File from '@models/File';
+import Deliveryman from '@models/Deliveryman';
 
-const models = [User, Recipient];
+const models = [User, Recipient, File, Deliveryman];
 
 class DataBase {
   public connection: Sequelize;
@@ -19,7 +21,10 @@ class DataBase {
     this.connection = new Sequelize(databaseConfig as Options);
 
     models.map(model => model.initialize(this.connection));
-    // .map(model => model.associate && model.associate(this.connection.models));
+
+    models.map(
+      model => model.associate && model.associate(this.connection.models)
+    );
   }
 }
 
