@@ -34,6 +34,7 @@ services:
       - POSTGRES_DB=${DB_NAME}
     volumes:
       - db_data:/var/lib/postgres/data
-
+    networks:
+      - fastfeet-network
 volumes:
   db_data:
