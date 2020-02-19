@@ -45,7 +45,12 @@ describe('File Upload', () => {
     expect(response.body).toHaveProperty('id');
   });
 
-  it('should return error when file was not provided', () => {
-    const response = await request(app).post('');
+  it('should return error when file was not provided', async () => {
+    const response = await request(app)
+      .post('/files')
+      .set('Authorization', token);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('error');
   });
 });
