@@ -50,12 +50,12 @@ describe('Recipients', () => {
   });
 
   it('should be able to edit values from a criated recipient', async () => {
-    const recipient = await factories.create<RecipientInterface>('Recipient');
+    const { id } = await factories.create<RecipientInterface>('Recipient');
     const recipientValuesToEdit = await factories.attrs<RecipientInterface>(
       'Recipient'
     );
     const response = await request(app)
-      .put(`/recipients/${recipient.id}`)
+      .put(`/recipients/${id}`)
       .set('Authorization', token)
       .send(recipientValuesToEdit);
 
