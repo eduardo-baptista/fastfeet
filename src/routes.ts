@@ -12,6 +12,7 @@ import SessionStoreSchema from '@validators/SessionStore';
 import RecipientStoreSchema from '@validators/RecipientStore';
 import RecipientUpdateSchema from '@validators/RecipientUpdate';
 import DeliverymanStoreSchema from '@validators/DeliverymanStore';
+import DeliverymanUpdateSchema from '@validators/DeliverymanUpdate';
 
 // middlewares
 import authMiddleware from '@middleware/auth';
@@ -55,5 +56,11 @@ routes.post(
   validationMiddleware(DeliverymanStoreSchema),
   DeliverymanController.store
 );
+routes.put(
+  '/deliverymen/:id',
+  validationMiddleware(DeliverymanUpdateSchema),
+  DeliverymanController.update
+);
+routes.get('/deliverymen', DeliverymanController.index);
 
 export default routes;

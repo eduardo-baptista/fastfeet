@@ -1,4 +1,5 @@
 import request from 'supertest';
+import faker from 'faker';
 import factories from '@tests-utils/factories';
 import generateToken from '@tests-utils/generateToken';
 import truncate from '@tests-utils/truncate';
@@ -47,5 +48,45 @@ describe('Deliveryman', () => {
 
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty('messages');
+  });
+
+  it('should be able edit values from a created deliveryman', async () => {
+    const { id } = await factories.create<DeliverymanInterface>('Deliveryman');
+    const valuesToEdit = await factories.attrs<DeliverymanInterface>(
+      'Deliveryman'
+    );
+
+    const response = await request(app)
+      .put(`/deliverymen/${id}`)
+      .set('Authorization', token)
+      .send(valuesToEdit);
+
+    expect(response.body).toMatchObject(valuesToEdit);
+  });
+
+  it('should return error when does not find deliveryman to edit', async () => {
+    const id = faker.random.number();
+
+    const valuesToEdit = await factories.attrs<DeliverymanInterface>(
+      'Deliveryman'
+    );
+
+    const response = await request(app)
+      .put(`/deliverymen/${id}`)
+      .set('Authorization', token)
+      .send(valuesToEdit);
+
+    expect(response.status).toBe(404);
+  });
+
+  it('should be able to list all deliverymen', async () => {
+    const numberOfDeliferymen = 5;
+    await factories.createMany('Deliveryman', numberOfDeliferymen);
+
+    const response = await request(app)
+      .get('/deliverymen')
+      .set('Authorization', token);
+
+    expect(response.body.length).toBe(numberOfDeliferymen);
   });
 });

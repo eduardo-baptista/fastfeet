@@ -29,7 +29,7 @@ factory.define('File', File, {
 
 factory.define('Deliveryman', Deliveryman, {
   name: () => faker.name.findName(),
-  avatar_id: () => factory.assoc('File', 'id'),
+  avatar_id: factory.assoc('File', 'id'),
   email: () => faker.internet.email(),
 });
 
