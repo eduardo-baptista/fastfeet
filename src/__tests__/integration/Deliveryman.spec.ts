@@ -89,4 +89,26 @@ describe('Deliveryman', () => {
 
     expect(response.body.length).toBe(numberOfDeliferymen);
   });
+
+  it('should be able to delete a deliveryman', async () => {
+    const { id } = await factories.create<DeliverymanInterface>('Deliveryman');
+
+    const response = await request(app)
+      .delete(`/deliverymen/${id}`)
+      .set('Authorization', token);
+
+    const numberOfDeliverymen = await Deliveryman.count();
+    expect(response.status).toBe(204);
+    expect(numberOfDeliverymen).toBe(0);
+  });
+
+  it('should return an error when does not find a deliveryman to delete', async () => {
+    const id = faker.random.number();
+
+    const response = await request(app)
+      .delete(`/deliverymen/${id}`)
+      .set('Authorization', token);
+
+    expect(response.status).toBe(404);
+  });
 });

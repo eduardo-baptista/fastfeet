@@ -26,6 +26,18 @@ class DeliverymanController {
 
     return res.json(deliverymen);
   }
+
+  async delete(req: Request, res: Response): Promise<Response | void> {
+    const { id } = req.params;
+    const deliveryman = await Deliveryman.findByPk(id);
+
+    if (!deliveryman)
+      return res.status(404).json({ error: 'Deliveryman did not find' });
+
+    await deliveryman.destroy();
+
+    return res.status(204).end();
+  }
 }
 
 export default new DeliverymanController();
