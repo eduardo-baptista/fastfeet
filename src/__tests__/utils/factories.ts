@@ -37,7 +37,6 @@ factory.define('Deliveryman', Deliveryman, {
 factory.define('Order', Order, {
   recipient_id: factory.assoc('Recipient', 'id'),
   deliveryman_id: factory.assoc('Deliveryman', 'id'),
-  signature_id: factory.assoc('File', 'id'),
   product: () => faker.random.word(),
 });
 
