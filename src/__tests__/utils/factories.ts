@@ -5,6 +5,7 @@ import User from '@models/User';
 import Recipient from '@models/Recipient';
 import File from '@models/File';
 import Deliveryman from '@models/Deliveryman';
+import Order from '@models/Order';
 
 factory.define('User', User, {
   name: () => faker.name.findName(),
@@ -31,6 +32,13 @@ factory.define('Deliveryman', Deliveryman, {
   name: () => faker.name.findName(),
   avatar_id: factory.assoc('File', 'id'),
   email: () => faker.internet.email(),
+});
+
+factory.define('Order', Order, {
+  recipient_id: factory.assoc('Recipient', 'id'),
+  deliveryman_id: factory.assoc('Deliveryman', 'id'),
+  signature_id: factory.assoc('File', 'id'),
+  product: () => faker.random.word(),
 });
 
 export default factory;
