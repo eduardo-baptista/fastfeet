@@ -1,5 +1,4 @@
 import request from 'supertest';
-<<<<<<< HEAD
 import faker from 'faker';
 import factories from '@tests-utils/factories';
 import generateToken from '@tests-utils/generateToken';
@@ -106,7 +105,3 @@ describe('Order', () => {
     expect(response.status).toBe(404);
   });
 });
-=======
-
-import truncate from '@tests-utils/truncate';
->>>>>>> 625b208aef17b4525c81179131273a1af785edbf
