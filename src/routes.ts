@@ -6,6 +6,7 @@ import SessionController from '@controllers/SessionController';
 import RecipientController from '@controllers/RecipientController';
 import FileController from '@controllers/FileController';
 import DeliverymanController from '@controllers/DeliverymanController';
+import OrderController from '@controllers/OrderController';
 
 // validations
 import SessionStoreSchema from '@validators/SessionStore';
@@ -13,6 +14,8 @@ import RecipientStoreSchema from '@validators/RecipientStore';
 import RecipientUpdateSchema from '@validators/RecipientUpdate';
 import DeliverymanStoreSchema from '@validators/DeliverymanStore';
 import DeliverymanUpdateSchema from '@validators/DeliverymanUpdate';
+import OrderStoreSchema from '@validators/OrderStore';
+import OrderUpdateSchema from '@validators/OrderUpdate';
 
 // middlewares
 import authMiddleware from '@middleware/auth';
@@ -63,5 +66,19 @@ routes.put(
 );
 routes.get('/deliverymen', DeliverymanController.index);
 routes.delete('/deliverymen/:id', DeliverymanController.delete);
+
+// order CRUD
+routes.post(
+  '/orders',
+  validationMiddleware(OrderStoreSchema),
+  OrderController.store
+);
+routes.put(
+  '/orders/:id',
+  validationMiddleware(OrderUpdateSchema),
+  OrderController.update
+);
+routes.get('/orders', OrderController.index);
+routes.delete('/orders/:id', OrderController.delete);
 
 export default routes;
