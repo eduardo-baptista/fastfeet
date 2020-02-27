@@ -80,14 +80,14 @@ describe('Deliveryman', () => {
   });
 
   it('should be able to list all deliverymen', async () => {
-    const numberOfDeliferymen = 5;
-    await factories.createMany('Deliveryman', numberOfDeliferymen);
+    const numberOfDeliverymen = 5;
+    await factories.createMany('Deliveryman', numberOfDeliverymen);
 
     const response = await request(app)
       .get('/deliverymen')
       .set('Authorization', token);
 
-    expect(response.body.length).toBe(numberOfDeliferymen);
+    expect(response.body.length).toBe(numberOfDeliverymen);
   });
 
   it('should be able to delete a deliveryman', async () => {
