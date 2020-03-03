@@ -5,7 +5,10 @@ const schema = Yup.object().shape({
   street: Yup.string().required(),
   number: Yup.number().required(),
   complement: Yup.string().required(),
-  state: Yup.string().required(),
+  state: Yup.string()
+    .max(2)
+    .min(2)
+    .required(),
   city: Yup.string().required(),
   cep: Yup.string()
     .min(8)

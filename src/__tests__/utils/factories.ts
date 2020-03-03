@@ -18,7 +18,7 @@ factory.define('Recipient', Recipient, {
   street: () => faker.address.streetName(),
   number: () => faker.random.number(),
   complement: () => faker.lorem.words(4),
-  state: () => faker.address.state(),
+  state: () => faker.random.alphaNumeric(2),
   city: () => faker.address.city(),
   cep: () => faker.address.zipCode('########'),
 });

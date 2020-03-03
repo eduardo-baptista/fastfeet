@@ -4,6 +4,13 @@ import Deliveryman from '@models/Deliveryman';
 
 class DeliverymanController {
   async store(req: Request, res: Response): Promise<Response> {
+    const { email } = req.body;
+
+    const emailCheck = await Deliveryman.findOne({ where: { email } });
+
+    if (emailCheck)
+      return res.status(400).json({ error: 'Email already used' });
+
     const deliveryman = await Deliveryman.create(req.body);
 
     return res.status(201).json(deliveryman);

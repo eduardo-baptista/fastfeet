@@ -111,4 +111,24 @@ describe('Deliveryman', () => {
 
     expect(response.status).toBe(404);
   });
+
+  it('should return error when try to create a deliveryman with used emails', async () => {
+    const { email } = await factories.create<DeliverymanInterface>(
+      'Deliveryman'
+    );
+
+    const attributes = await factories.attrs<DeliverymanInterface>(
+      'Deliveryman',
+      {
+        email,
+      }
+    );
+
+    const response = await request(app)
+      .post('/deliverymen')
+      .set('Authorization', token)
+      .send(attributes);
+
+    expect(response.status).toBe(400);
+  });
 });
