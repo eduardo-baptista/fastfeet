@@ -6,3 +6,8 @@ export abstract class ModelImplementation extends Model {
 
   public static associate?(models: { [key: string]: ModelCtor<Model> }): void;
 }
+
+export interface JobInterface {
+  key: string;
+  handle<T>({ data }: { data: T }): void;
+}

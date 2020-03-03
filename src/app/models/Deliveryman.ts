@@ -31,7 +31,7 @@ class Deliveryman extends ModelImplementation {
         avatar_id: DataTypes.INTEGER,
         email: DataTypes.STRING,
       },
-      { sequelize, tableName: 'Deliverymen' }
+      { sequelize, tableName: 'deliverymen' }
     );
   }
 
