@@ -1,6 +1,5 @@
 import { Model, Sequelize, ModelCtor } from 'sequelize';
 
-// eslint-disable-next-line import/prefer-default-export
 export abstract class ModelImplementation extends Model {
   public static initialize?(sequelize: Sequelize): void;
 
@@ -9,5 +8,5 @@ export abstract class ModelImplementation extends Model {
 
 export interface JobInterface {
   key: string;
-  handle<T>({ data }: { data: T }): void;
+  handle({ data }: { data: unknown }): void;
 }

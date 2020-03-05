@@ -2,6 +2,9 @@ import { Sequelize, DataTypes, Model, ModelCtor } from 'sequelize';
 
 import { ModelImplementation } from '@typings/types';
 
+import Recipient from '@models/Recipient';
+import Deliveryman from '@models/Deliveryman';
+
 export interface OrderInterface {
   readonly id: number;
   recipient_id: number;
@@ -11,6 +14,8 @@ export interface OrderInterface {
   canceled_at: Date;
   start_date: Date;
   end_date: Date;
+  recipient?: Recipient;
+  deliveryman?: Deliveryman;
   readonly created_at: Date;
   readonly updated_at: Date;
 }
@@ -31,6 +36,10 @@ class Order extends ModelImplementation {
   start_date!: Date;
 
   end_date!: Date;
+
+  readonly recipient?: Recipient;
+
+  readonly deliveryman?: Deliveryman;
 
   readonly created_at!: Date;
 
