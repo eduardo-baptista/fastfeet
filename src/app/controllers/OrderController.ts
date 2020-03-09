@@ -4,8 +4,22 @@ import Order from '@models/Order';
 import Deliveryman from '@models/Deliveryman';
 import Recipient from '@models/Recipient';
 
+import CreateOrderMail from '@jobs/CreateOrderMail';
+
 class OrderController {
   async store(req: Request, res: Response): Promise<Response> {
+    const { deliveryman_id, recipient_id } = req.body;
+
+    const checkDeliveryman = await Deliveryman.findByPk(deliveryman_id);
+
+    if (!checkDeliveryman)
+      return res.status(400).json({ error: 'Deliveryman did not find' });
+
+    const checkRecipient = await Recipient.findByPk(recipient_id);
+
+    if (!checkRecipient)
+      return res.status(400).json({ error: 'Recipient did not find' });
+
     const order = await Order.create(req.body);
 
     await order.reload({
@@ -14,6 +28,8 @@ class OrderController {
         { model: Deliveryman, as: 'deliveryman' },
       ],
     });
+
+    CreateOrderMail.handle({ data: { order } });
 
     return res.status(201).json(order);
   }

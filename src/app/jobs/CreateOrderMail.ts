@@ -17,7 +17,6 @@ class CreateOrderEmail implements JobInterface {
 
     Mail.sendMail({
       to: `${order.deliveryman?.name} <${order.deliveryman?.email}>`,
-      // colocar nome do produto no titulo
       subject: 'Novo produto disponivel para entrega!',
       template: 'createOrder',
       context: {
