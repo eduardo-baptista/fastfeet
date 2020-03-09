@@ -7,6 +7,7 @@ import RecipientController from '@controllers/RecipientController';
 import FileController from '@controllers/FileController';
 import DeliverymanController from '@controllers/DeliverymanController';
 import OrderController from '@controllers/OrderController';
+import DeliveryController from '@controllers/DeliveryController';
 
 // validations
 import SessionStoreSchema from '@validators/SessionStore';
@@ -66,6 +67,9 @@ routes.put(
 );
 routes.get('/deliverymen', DeliverymanController.index);
 routes.delete('/deliverymen/:id', DeliverymanController.delete);
+
+// show order per deliveryman
+routes.get('/deliveryman/:deliverymanid/deliveries', DeliveryController.index);
 
 // order CRUD
 routes.post(
