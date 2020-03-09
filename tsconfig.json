@@ -17,7 +17,6 @@
       "@models/*": ["app/models/*"],
       "@controllers/*": ["app/controllers/*"],
       "@validators/*": ["app/validators/*"],
-      "@tests-utils/*": ["__tests__/utils/*"],
       "@libs/*": ["libs/*"],
       "@jobs/*": ["app/jobs/*"]
     },
