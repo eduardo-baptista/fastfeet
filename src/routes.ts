@@ -8,6 +8,8 @@ import FileController from '@controllers/FileController';
 import DeliverymanController from '@controllers/DeliverymanController';
 import OrderController from '@controllers/OrderController';
 import DeliveryController from '@controllers/DeliveryController';
+import StartDeliveryController from '@controllers/StartDeliveryController';
+import EndDeliveryController from '@controllers/EndDeliveryController';
 
 // validations
 import SessionStoreSchema from '@validators/SessionStore';
@@ -17,6 +19,8 @@ import DeliverymanStoreSchema from '@validators/DeliverymanStore';
 import DeliverymanUpdateSchema from '@validators/DeliverymanUpdate';
 import OrderStoreSchema from '@validators/OrderStore';
 import OrderUpdateSchema from '@validators/OrderUpdate';
+import StartDeliveryStoreSchema from '@validators/StartDeliveryStore';
+import EndDeliveryStoreSchema from '@validators/EndDeliveryStore';
 
 // middlewares
 import authMiddleware from '@middleware/auth';
@@ -70,6 +74,19 @@ routes.delete('/deliverymen/:id', DeliverymanController.delete);
 
 // show order per deliveryman
 routes.get('/deliveryman/:deliverymanid/deliveries', DeliveryController.index);
+
+// start delivery
+routes.post(
+  '/deliveries/start',
+  validationMiddleware(StartDeliveryStoreSchema),
+  StartDeliveryController.store
+);
+// end delivery
+routes.post(
+  '/deliveries/end',
+  validationMiddleware(EndDeliveryStoreSchema),
+  EndDeliveryController.store
+);
 
 // order CRUD
 routes.post(
