@@ -8,5 +8,5 @@ export abstract class ModelImplementation extends Model {
 
 export interface JobInterface {
   key: string;
-  handle({ data }: { data: unknown }): void;
+  handle({ data }: { data: unknown }): Promise<void>;
 }

@@ -11,16 +11,37 @@ services:
       - .:/home/node/api
     environment:
       - DB_URL=fastfeet-db
+      - REDIS_URL=fastfeet-redis
     depends_on:
       - fastfeet-db
+      - fastfeet-redis
     networks:
       - fastfeet-network
     links:
       - fastfeet-db
+      - fastfeet-redis
     container_name: fastfeet-api
     command: yarn dev
     ports:
       - 3333:3333
+
+  fastfeet-queue:
+    build: .
+    volumes:
+      - .:/home/node/api
+    environment:
+      - DB_URL=fastfeet-db
+      - REDIS_URL=fastfeet-redis
+    depends_on:
+      - fastfeet-db
+      - fastfeet-redis
+    networks:
+      - fastfeet-network
+    links:
+      - fastfeet-db
+      - fastfeet-redis
+    container_name: fastfeet-queue
+    command: yarn queue
 
   fastfeet-db:
     image: postgres
@@ -36,5 +57,19 @@ services:
       - db_data:/var/lib/postgres/data
     networks:
       - fastfeet-network
+
+  fastfeet-redis:
+    image: bitnami/redis:latest
+    container_name: fastfeet-redis
+    restart: always
+    networks:
+      - fastfeet-network
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - REDIS_PASSWORD=${REDIS_PASS}
+    volumes:
+      - redis_data:/bitnami/redis/data
+
 volumes:
   db_data:
+  redis_data:
