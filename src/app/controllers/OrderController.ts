@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import Order from '@models/Order';
+import Queue from '@libs/Queue';
 import Deliveryman from '@models/Deliveryman';
 import Recipient from '@models/Recipient';
 
@@ -29,7 +30,7 @@ class OrderController {
       ],
     });
 
-    CreateOrderMail.handle({ data: { order } });
+    Queue.add(CreateOrderMail.key, { order });
 
     return res.status(201).json(order);
   }

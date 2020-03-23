@@ -10,6 +10,7 @@ import OrderController from '@controllers/OrderController';
 import DeliveryController from '@controllers/DeliveryController';
 import StartDeliveryController from '@controllers/StartDeliveryController';
 import EndDeliveryController from '@controllers/EndDeliveryController';
+import DeliveryProblemController from '@controllers/DeliveryProblemController';
 
 // validations
 import SessionStoreSchema from '@validators/SessionStore';
@@ -87,6 +88,12 @@ routes.post(
   validationMiddleware(EndDeliveryStoreSchema),
   EndDeliveryController.store
 );
+
+// list problems per order
+routes.get('/delivery/:deliveryid/problems', DeliveryProblemController.index);
+
+// create new problem
+routes.post('/delivery/:deliveryid/problems', DeliveryProblemController.store);
 
 // order CRUD
 routes.post(

@@ -7,8 +7,9 @@ import Recipient from '@models/Recipient';
 import File from '@models/File';
 import Deliveryman from '@models/Deliveryman';
 import Order from '@models/Order';
+import DeliveryProblem from '@models/DeliveryProblem';
 
-const models = [User, Recipient, File, Deliveryman, Order];
+const models = [User, Recipient, File, Deliveryman, Order, DeliveryProblem];
 
 class DataBase {
   public connection: Sequelize;
