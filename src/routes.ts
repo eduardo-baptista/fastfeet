@@ -22,6 +22,7 @@ import OrderStoreSchema from '@validators/OrderStore';
 import OrderUpdateSchema from '@validators/OrderUpdate';
 import StartDeliveryStoreSchema from '@validators/StartDeliveryStore';
 import EndDeliveryStoreSchema from '@validators/EndDeliveryStore';
+import DeliveryProblemStoreSchema from '@validators/DeliveryProblemStore';
 
 // middlewares
 import authMiddleware from '@middleware/auth';
@@ -93,7 +94,11 @@ routes.post(
 routes.get('/delivery/:deliveryid/problems', DeliveryProblemController.index);
 
 // create new problem
-routes.post('/delivery/:deliveryid/problems', DeliveryProblemController.store);
+routes.post(
+  '/delivery/:deliveryid/problems',
+  validationMiddleware(DeliveryProblemStoreSchema),
+  DeliveryProblemController.store
+);
 
 // order CRUD
 routes.post(
