@@ -12,7 +12,17 @@ class EndDeliveryController {
     if (!order.start_date)
       return res.status(400).json({ error: 'this delivery has not started' });
 
-    order.update({
+    if (order.end_date)
+      return res
+        .status(400)
+        .json({ error: 'this delivery has already been ended' });
+
+    if (order.canceled_at)
+      return res
+        .status(400)
+        .json({ error: 'this delivery has  been canceled' });
+
+    await order.update({
       end_date: endDate,
       signature_id,
     });

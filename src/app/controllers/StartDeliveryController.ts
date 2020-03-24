@@ -11,10 +11,14 @@ class StartDeliveryController {
 
     const order = await Order.findByPk(delivery_id);
     if (!order) return res.status(404).json({ error: 'Delivery did not find' });
+
     if (order.start_date)
       return res
         .status(400)
         .json({ error: 'this delivery has already started' });
+
+    if (order.canceled_at)
+      return res.status(400).json({ error: 'this delivery has been canceled' });
 
     const { deliveryman_id } = order;
 
@@ -23,7 +27,7 @@ class StartDeliveryController {
         deliveryman_id,
         start_date: {
           [Op.between]: [startOfDay(startDate), endOfDay(startDate)],
-        },
+        } as object,
       },
     });
     if (deliverymanOrdersDay.length >= 5)

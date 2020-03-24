@@ -1,11 +1,13 @@
 import Bee from 'bee-queue';
 
 import CreateOrderMail from '@jobs/CreateOrderMail';
+import CancelOrderMail from '@jobs/CancelOrderMail';
+
 import redisConfig from '@config/redis';
 
 import { JobInterface } from '@typings/types';
 
-const jobs: JobInterface[] = [CreateOrderMail];
+const jobs: JobInterface[] = [CreateOrderMail, CancelOrderMail];
 
 class Queue {
   queues: { [key: string]: { bee: Bee; handle(data: unknown): Promise<void> } };

@@ -11,6 +11,7 @@ import DeliveryController from '@controllers/DeliveryController';
 import StartDeliveryController from '@controllers/StartDeliveryController';
 import EndDeliveryController from '@controllers/EndDeliveryController';
 import DeliveryProblemController from '@controllers/DeliveryProblemController';
+import CancelDeliveryController from '@controllers/CancelDeliveryController';
 
 // validations
 import SessionStoreSchema from '@validators/SessionStore';
@@ -83,6 +84,10 @@ routes.post(
   validationMiddleware(StartDeliveryStoreSchema),
   StartDeliveryController.store
 );
+
+// cancel delivery by problem id
+routes.delete('/problem/:id/cancel-delivery', CancelDeliveryController.delete);
+
 // end delivery
 routes.post(
   '/deliveries/end',
