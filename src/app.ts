@@ -2,6 +2,7 @@ import './bootstrap.js';
 
 import express, { Application } from 'express';
 import 'express-async-errors';
+import cors from 'cors';
 
 // start database connection
 import './database';
@@ -19,6 +20,7 @@ class App {
   }
 
   private middleware(): void {
+    this.server.use(cors());
     this.server.use(express.json());
   }
 
