@@ -4,6 +4,7 @@ import * as Sentry from '@sentry/node';
 import express, { Application } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
+import helmet from 'helmet';
 
 import exceptionHandler from '@middleware/exceptionHandler';
 
@@ -28,6 +29,7 @@ class App {
 
   private middleware(): void {
     this.server.use(Sentry.Handlers.requestHandler());
+    this.server.use(helmet());
     this.server.use(cors());
     this.server.use(express.json());
   }
