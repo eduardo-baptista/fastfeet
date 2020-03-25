@@ -9,5 +9,6 @@ declare namespace NodeJS {
     MAIL_PORT: number;
     MAIL_USER: string;
     MAIL_PASS: string;
+    SENTRY_DNS: string;
   }
 }

@@ -6,6 +6,7 @@
   "author": "Eduardo Baptista <eduardofbaptista@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@sentry/node": "5.14.2",
     "bcryptjs": "^2.4.3",
     "bee-queue": "^1.2.3",
     "cors": "^2.8.5",
