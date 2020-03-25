@@ -5,6 +5,8 @@ import express, { Application } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
 
+import exceptionHandler from '@middleware/exceptionHandler';
+
 // start database connection
 import './database';
 
@@ -21,6 +23,7 @@ class App {
 
     this.middleware();
     this.routes();
+    this.exceptionHandler();
   }
 
   private middleware(): void {
@@ -32,6 +35,10 @@ class App {
   private routes(): void {
     this.server.use(routes);
     this.server.use(Sentry.Handlers.errorHandler());
+  }
+
+  private exceptionHandler(): void {
+    this.server.use(exceptionHandler);
   }
 }
 
