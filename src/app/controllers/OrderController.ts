@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Op, WhereOptions } from 'sequelize';
 
 import Order from '@models/Order';
 import Queue from '@libs/Queue';
@@ -48,7 +49,11 @@ class OrderController {
   }
 
   async index(req: Request, res: Response): Promise<Response> {
-    const orders = await Order.findAll();
+    const { q } = req.query;
+
+    const where: WhereOptions = q ? { product: { [Op.iLike]: q } } : {};
+
+    const orders = await Order.findAll({ where });
 
     return res.json(orders);
   }

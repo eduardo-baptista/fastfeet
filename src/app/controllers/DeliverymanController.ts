@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Op, WhereOptions } from 'sequelize';
 
 import Deliveryman from '@models/Deliveryman';
 
@@ -29,7 +30,11 @@ class DeliverymanController {
   }
 
   async index(req: Request, res: Response): Promise<Response> {
-    const deliverymen = await Deliveryman.findAll();
+    const { q } = req.query;
+
+    const where: WhereOptions = q ? { name: { [Op.iLike]: q } } : {};
+
+    const deliverymen = await Deliveryman.findAll({ where });
 
     return res.json(deliverymen);
   }

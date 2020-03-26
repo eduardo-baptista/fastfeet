@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Op, WhereOptions } from 'sequelize';
 
 import Recipient from '@models/Recipient';
 
@@ -23,7 +24,11 @@ class RecipientController {
   }
 
   async index(req: Request, res: Response): Promise<Response> {
-    const recipients = await Recipient.findAll();
+    const { q } = req.query;
+
+    const where: WhereOptions = q ? { name: { [Op.iLike]: q } } : {};
+
+    const recipients = await Recipient.findAll({ where });
 
     return res.json(recipients);
   }
