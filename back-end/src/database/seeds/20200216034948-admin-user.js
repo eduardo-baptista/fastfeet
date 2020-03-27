@@ -1,7 +1,15 @@
 const bcrypt = require('bcryptjs');
 
 module.exports = {
-  up: QueryInterface => {
+  up: async QueryInterface => {
+    const user = await QueryInterface.rawSelect(
+      'users',
+      {
+        where: { email: 'admin@fastfeet.com' },
+      },
+      'email'
+    );
+    if (user) return;
     return QueryInterface.bulkInsert(
       'users',
       [

@@ -20,6 +20,8 @@ After that you just need to exec:
 
 ```
 docker-compose up
+yarn sequelize-cli db:migrate or npx sequelize db:migrate
+yarn sequelize-cli db:Seed:all or npx sequelize db:seed:all
 ```
 
 #### Docs
