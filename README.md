@@ -12,7 +12,7 @@ this is a app for a fake shipping company called Fastfeet, that consist in manag
 
 ### Back-end
 
-#### launch
+#### Launch
 
 to start the api enter in the back-end folder copy the `.env.exemple` and replace the name for `.env`, then fill with correct informations.
 
@@ -22,7 +22,13 @@ After that you just need to exec:
 docker-compose up
 ```
 
-#### technologies
+#### Docs
+
+You can see all avaliable api methods on insomnia:
+
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Fastfeet-api&uri=https%3A%2F%2Fgithub.com%2Feduardo-baptista%2Ffastfeet%2Fblob%2Fmaster%2FInsomnia_data.json)
+
+#### Technologies
 
 - node JS
 - Express
