@@ -8,7 +8,7 @@
 
 ## :rocket: About the Project
 
-this is a app for a fake shipping company called Fastfeet, that consist in manage deliverys for with differents deliverymans and recipients.
+this is a app for a fake shipping company called Fastfeet, that consist in manage deliverys for differents deliverymans and recipients.
 
 ### Back-end
 
