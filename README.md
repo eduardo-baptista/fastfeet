@@ -28,7 +28,7 @@ yarn sequelize-cli db:Seed:all or npx sequelize db:seed:all
 
 You can see all avaliable api methods on insomnia:
 
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Fastfeet-api&uri=https%3A%2F%2Fgithub.com%2Feduardo-baptista%2Ffastfeet%2Fblob%2Fmaster%2FInsomnia_data.json)
+<a href="https://insomnia.rest/run/?label=Fastfeet-api&uri=https%3A%2F%2Fraw.githubusercontent.com%2Feduardo-baptista%2Ffastfeet%2Fmaster%2FInsomnia_data.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 
 #### Technologies
 
