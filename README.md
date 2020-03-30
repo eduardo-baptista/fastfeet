@@ -19,7 +19,7 @@ to start the api enter in the back-end folder copy the `.env.exemple` and replac
 After that you just need to exec:
 
 ```
-docker-compose up
+docker-compose up -d
 yarn sequelize-cli db:migrate or npx sequelize db:migrate
 yarn sequelize-cli db:seed:all or npx sequelize db:seed:all
 ```
