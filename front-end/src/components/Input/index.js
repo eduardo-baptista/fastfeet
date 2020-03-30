@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useField } from '@unform/core';
 import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
-export default function Input({ label, placeholder, ...rest }) {
+export default function Input({ label, name, ...rest }) {
+  const inputRef = useRef(null);
+  const { defaultValue, error, fieldName, registerField } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'value',
+    });
+  }, [fieldName, registerField]);
+
   return (
     <Container>
-      <label htmlFor="te">{label}</label>
-      <input type="text" id="te" placeholder={placeholder} {...rest} />
+      <label htmlFor={name}>{label}</label>
+      <input ref={inputRef} id={name} defaultValue={defaultValue} {...rest} />
     </Container>
   );
 }
 Input.propTypes = {
   label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-};
-
-Input.defaultProps = {
-  placeholder: '',
+  name: PropTypes.string.isRequired,
 };
