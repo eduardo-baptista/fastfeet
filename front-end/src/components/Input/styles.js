@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -31,5 +31,17 @@ export const Container = styled.div`
     &:focus {
       border-color: #7d40e7;
     }
+
+    ${(props) =>
+      props.error &&
+      css`
+        border-color: #de3b3b;
+      `}
   }
+`;
+
+export const Error = styled.span`
+  color: #de3b3b;
+  display: block;
+  margin-top: 5px;
 `;
