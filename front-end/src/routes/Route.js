@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 // layouts
 import AuthLayout from '~/pages/_layouts/auth';
+import DefaultLayout from '~/pages/_layouts/default';
 
 export default function RouteWrapper({
   component: Component,
@@ -16,7 +17,7 @@ export default function RouteWrapper({
   if (!signed && isPrivate) return <Redirect to="/" />;
   if (signed && !isPrivate) return <Redirect to="/encomendas" />;
 
-  const Layout = AuthLayout;
+  const Layout = signed ? DefaultLayout : AuthLayout;
 
   return (
     <Route
