@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // layouts
 import AuthLayout from '~/pages/_layouts/auth';
@@ -10,8 +11,7 @@ export default function RouteWrapper({
   isPrivate,
   ...rest
 }) {
-  // get from redux
-  const signed = false;
+  const signed = useSelector((state) => state.auth.signed);
 
   if (!signed && isPrivate) return <Redirect to="/" />;
   if (signed && !isPrivate) return <Redirect to="/encomendas" />;

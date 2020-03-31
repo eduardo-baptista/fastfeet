@@ -1,18 +1,25 @@
 import React, { useRef } from 'react';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
 
 // components
 import Input from '~/components/Input';
 import Form from '~/components/Form';
+import Loader from '~/components/Loader';
 import { Logo, SigninButton } from './styles';
 
 // assets
 import logo from '~/assets/fastfeet-logo.png';
 
+// actions
+import { signInRequest } from '~/store/modules/auth/actions';
+
 // utils
 import formatErrors from '~/utils/formatErrors';
 
 export default function SignIn() {
+  const dispatch = useDispatch();
+  const loading = useSelector((store) => store.auth.loading);
   const formRef = useRef(null);
 
   async function handleSubmit(data) {
@@ -25,6 +32,10 @@ export default function SignIn() {
       });
 
       await schema.validate(data, { abortEarly: false });
+
+      formRef.current.setErrors({});
+
+      dispatch(signInRequest(data.email, data.password));
     } catch (err) {
       const validationErrors = formatErrors(err);
       validationErrors && formRef.current.setErrors(validationErrors);
@@ -46,7 +57,9 @@ export default function SignIn() {
           placeholder="*************"
           type="password"
         />
-        <SigninButton type="submit">Entrar no sistema</SigninButton>
+        <SigninButton type="submit">
+          {loading ? <Loader size="30" /> : 'Entrar no sistema'}
+        </SigninButton>
       </Form>
     </>
   );
