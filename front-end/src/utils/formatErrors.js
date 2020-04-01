@@ -1,6 +1,6 @@
 import { ValidationError } from 'yup';
 
-export default function (errors) {
+export default (errors) => {
   // format yup errors
   if (errors instanceof ValidationError) {
     return errors.inner.reduce((obj, error) => {
@@ -8,4 +8,6 @@ export default function (errors) {
       return obj;
     }, {});
   }
-}
+
+  return false;
+};

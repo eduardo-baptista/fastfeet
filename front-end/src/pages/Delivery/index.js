@@ -5,6 +5,7 @@ import ContainerPage from '~/components/ContainerPage';
 import ActionRow from '~/components/ActionRow';
 import SearchInput from '~/components/SearchInput';
 import { PrimaryButton } from '~/components/Buttons';
+import Table from '~/components/Table';
 
 export default function Delivery() {
   return (
@@ -17,6 +18,28 @@ export default function Delivery() {
           CADASTRAR
         </PrimaryButton>
       </ActionRow>
+      <Table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Destinatário</th>
+            <th>Entregador</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>test</td>
+          </tr>
+
+          <tr>
+            <td>test</td>
+          </tr>
+        </tbody>
+      </Table>
     </ContainerPage>
   );
 }
