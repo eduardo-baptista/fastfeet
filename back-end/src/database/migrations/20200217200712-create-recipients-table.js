@@ -24,7 +24,7 @@ module.exports = {
         allowNull: false,
       },
       state: {
-        type: Sequelize.STRING(2),
+        type: Sequelize.STRING(30),
         allowNull: false,
       },
       city: {
