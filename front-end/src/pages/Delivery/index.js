@@ -7,6 +7,8 @@ import SearchInput from '~/components/SearchInput';
 import { PrimaryButton } from '~/components/Buttons';
 import Table from '~/components/Table';
 
+import DeliveryTableRow from './DeliveryTableRow';
+
 export default function Delivery() {
   return (
     <ContainerPage title="Gerenciando encomendas">
@@ -31,19 +33,7 @@ export default function Delivery() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>#01</td>
-            <td>
-              Ludwig van
-              BeethovenBeethovenBeethovenBeethovenBeethovenBeethovenBeethovenBeethovenBeethoven
-              BeethovenBeethovenBeethovenBeethovenBeethoven
-            </td>
-            <td>John Doe</td>
-            <td>Rio do Sul</td>
-            <td>Santa Catarina</td>
-            <td>entregue</td>
-            <td>test</td>
-          </tr>
+          <DeliveryTableRow />
         </tbody>
       </Table>
     </ContainerPage>

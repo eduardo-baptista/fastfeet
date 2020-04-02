@@ -31,10 +31,6 @@ export default styled.table`
 
     td {
       max-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
       height: 57px;
 
       &:first-child {
