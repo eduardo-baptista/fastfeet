@@ -14,6 +14,7 @@ export interface OrderInterface {
   canceled_at: Date;
   start_date: Date;
   end_date: Date;
+  status: string;
   recipient?: Recipient;
   deliveryman?: Deliveryman;
   readonly created_at: Date;
@@ -37,6 +38,8 @@ class Order extends ModelImplementation {
 
   end_date!: Date;
 
+  status!: string;
+
   readonly recipient?: Recipient;
 
   readonly deliveryman?: Deliveryman;
@@ -55,6 +58,16 @@ class Order extends ModelImplementation {
         canceled_at: DataTypes.DATE,
         start_date: DataTypes.DATE,
         end_date: DataTypes.DATE,
+        status: {
+          type: DataTypes.VIRTUAL,
+          get(): string {
+            const order = (this as unknown) as Order;
+            if (order.canceled_at) return 'cancelada';
+            if (order.end_date) return 'entregue';
+            if (order.start_date) return 'retirada';
+            return 'pendente';
+          },
+        },
       },
       { sequelize }
     );
