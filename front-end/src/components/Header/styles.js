@@ -26,6 +26,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    flex-shrink: 0;
 
     line-height: 1.36;
 

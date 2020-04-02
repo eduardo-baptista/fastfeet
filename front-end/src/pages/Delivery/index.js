@@ -32,10 +32,16 @@ export default function Delivery() {
         </thead>
         <tbody>
           <tr>
-            <td>test</td>
-          </tr>
-
-          <tr>
+            <td>#01</td>
+            <td>
+              Ludwig van
+              BeethovenBeethovenBeethovenBeethovenBeethovenBeethovenBeethovenBeethovenBeethoven
+              BeethovenBeethovenBeethovenBeethovenBeethoven
+            </td>
+            <td>John Doe</td>
+            <td>Rio do Sul</td>
+            <td>Santa Catarina</td>
+            <td>entregue</td>
             <td>test</td>
           </tr>
         </tbody>
