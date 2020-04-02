@@ -26,8 +26,16 @@ class OrderController {
 
     await order.reload({
       include: [
-        { model: Recipient, as: 'recipient' },
-        { model: Deliveryman, as: 'deliveryman' },
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['name', 'street', 'number', 'city', 'state'],
+        },
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['name', 'email'],
+        },
       ],
     });
 

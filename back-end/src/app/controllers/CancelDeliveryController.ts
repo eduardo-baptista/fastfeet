@@ -18,8 +18,16 @@ class CancelDeliveryController {
 
     const order = await Order.findByPk(problem.delivery_id, {
       include: [
-        { model: Recipient, as: 'recipient' },
-        { model: Deliveryman, as: 'deliveryman' },
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['name', 'street', 'number', 'city', 'state'],
+        },
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['name', 'email'],
+        },
       ],
     });
 
