@@ -12,6 +12,7 @@ export const Status = styled.span`
   border-radius: 12px;
   font-weight: bold;
   line-height: 1.36;
+  font-size: 14px;
   padding: 4px 10px 4px 22px;
 
   color: ${(props) => statusColors[props.children].text};
@@ -28,5 +29,22 @@ export const Status = styled.span`
     top: calc(50% - 5px);
     left: 6px;
     background-color: ${(props) => statusColors[props.children].text};
+  }
+`;
+
+export const AvatarItem = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  > div {
+    margin-right: 5px;
   }
 `;

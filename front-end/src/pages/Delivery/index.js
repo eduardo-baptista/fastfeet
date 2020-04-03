@@ -9,22 +9,26 @@ import Table from '~/components/Table';
 
 import api from '~/services/api';
 
+import formatId from '~/utils/formatId';
+
 import DeliveryTableRow from './DeliveryTableRow';
 
 export default function Delivery() {
   const [deliveries, setDeliveries] = useState([]);
+  const [filter, setFilter] = useState('');
 
   const formatData = useCallback((deliveriesToFormat) => {
     return deliveriesToFormat.map((delivery) => {
       delivery.status = delivery.status.toUpperCase();
+      delivery.maskedId = formatId(delivery.id);
       return delivery;
     });
   }, []);
 
   const fetchData = useCallback(async () => {
-    const { data } = await api.get('/orders');
+    const { data } = await api.get('/orders', { params: { q: filter } });
     setDeliveries(formatData(data));
-  }, [formatData]);
+  }, [formatData, filter]);
 
   useEffect(() => {
     fetchData();
@@ -33,7 +37,11 @@ export default function Delivery() {
   return (
     <ContainerPage title="Gerenciando encomendas">
       <ActionRow>
-        <SearchInput placeholder="Buscar por encomendas" />
+        <SearchInput
+          placeholder="Buscar por encomendas"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />
 
         <PrimaryButton type="button">
           <MdAdd size={22} />
@@ -44,6 +52,7 @@ export default function Delivery() {
         <thead>
           <tr>
             <th>ID</th>
+            <th>Produto</th>
             <th>Destinatário</th>
             <th>Entregador</th>
             <th>Cidade</th>
@@ -54,7 +63,7 @@ export default function Delivery() {
         </thead>
         <tbody>
           {deliveries.map((delivery) => (
-            <DeliveryTableRow delivery={delivery} />
+            <DeliveryTableRow delivery={delivery} key={delivery.id} />
           ))}
         </tbody>
       </Table>

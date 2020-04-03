@@ -16,6 +16,7 @@ export const Button = styled.button`
 export const Menu = styled.div`
   display: flex;
   flex-direction: column;
+  z-index: 1;
 
   position: absolute;
   top: calc(50% + 15px);

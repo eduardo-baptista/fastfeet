@@ -13,6 +13,11 @@ export default function ActionCell({ children }) {
     document.removeEventListener('click', handleClick);
   }, []);
 
+  function handleClickEvent(e) {
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  }
+
   useEffect(() => {
     if (isOpen) {
       document.addEventListener('click', handleClick);
@@ -21,7 +26,7 @@ export default function ActionCell({ children }) {
 
   return (
     <td>
-      <Button type="button" onClick={() => setIsOpen(!isOpen)} ref={menuRef}>
+      <Button type="button" onClick={handleClickEvent} ref={menuRef}>
         <MdMoreHoriz color="#c6c6c6" size={22} />
 
         {isOpen && <Menu>{children}</Menu>}

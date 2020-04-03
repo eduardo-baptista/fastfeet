@@ -61,7 +61,21 @@ class OrderController {
 
     const where: WhereOptions = q ? { product: { [Op.iLike]: q } } : {};
 
-    const orders = await Order.findAll({ where });
+    const orders = await Order.findAll({
+      where,
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['name', 'city', 'state'],
+        },
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['name'],
+        },
+      ],
+    });
 
     return res.json(orders);
   }
