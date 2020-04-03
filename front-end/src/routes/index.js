@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 
 import Route from './Route';
 
@@ -12,6 +12,9 @@ export default function routes() {
     <Switch>
       <Route path="/" exact component={SignIn} />
       <Route path="/encomendas" component={Delivery} isPrivate />
+      <Route path="*">
+        <Redirect to="/" />
+      </Route>
     </Switch>
   );
 }

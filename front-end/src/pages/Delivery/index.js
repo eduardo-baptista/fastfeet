@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { MdAdd } from 'react-icons/md';
 
 import ContainerPage from '~/components/ContainerPage';
@@ -7,9 +7,29 @@ import SearchInput from '~/components/SearchInput';
 import { PrimaryButton } from '~/components/Buttons';
 import Table from '~/components/Table';
 
+import api from '~/services/api';
+
 import DeliveryTableRow from './DeliveryTableRow';
 
 export default function Delivery() {
+  const [deliveries, setDeliveries] = useState([]);
+
+  const formatData = useCallback((deliveriesToFormat) => {
+    return deliveriesToFormat.map((delivery) => {
+      delivery.status = delivery.status.toUpperCase();
+      return delivery;
+    });
+  }, []);
+
+  const fetchData = useCallback(async () => {
+    const { data } = await api.get('/orders');
+    setDeliveries(formatData(data));
+  }, [formatData]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   return (
     <ContainerPage title="Gerenciando encomendas">
       <ActionRow>
@@ -33,7 +53,9 @@ export default function Delivery() {
           </tr>
         </thead>
         <tbody>
-          <DeliveryTableRow />
+          {deliveries.map((delivery) => (
+            <DeliveryTableRow delivery={delivery} />
+          ))}
         </tbody>
       </Table>
     </ContainerPage>

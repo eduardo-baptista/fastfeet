@@ -1,20 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { MdMoreHoriz } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { Button, Menu } from './styles';
 
-export default function ActionCell() {
+export default function ActionCell({ children }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  const handleClick = useCallback((e) => {
+    if (!menuRef.current.contains(e.target)) setIsOpen(false);
+    document.removeEventListener('click', handleClick);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('click', handleClick);
+    }
+  }, [isOpen, handleClick]);
+
   return (
     <td>
-      <Button type="button">
+      <Button type="button" onClick={() => setIsOpen(!isOpen)} ref={menuRef}>
         <MdMoreHoriz color="#c6c6c6" size={22} />
-        <Menu>
-          <Link to="/encomendas/visualizar">Visualizar</Link>
-          <Link to="/encomendas/Editar">Editar</Link>
-          <Link to="/encomendas/Excluir">Excluir</Link>
-        </Menu>
+
+        {isOpen && <Menu>{children}</Menu>}
       </Button>
     </td>
   );
 }
+
+ActionCell.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
+};

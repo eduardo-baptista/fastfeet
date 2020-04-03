@@ -1,4 +1,6 @@
 import React from 'react';
+import { MdRemoveRedEye, MdModeEdit, MdDeleteForever } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 import ActionCell from '~/components/ActionCell';
 import TextBodyCell from '~/components/TextBodyCell';
@@ -18,7 +20,20 @@ export default function DeliveryTableRow() {
       <td>
         <Status>RETIRADA</Status>
       </td>
-      <ActionCell />
+      <ActionCell>
+        <Link to="/encomendas/visualizar">
+          <MdRemoveRedEye size={15} color="#8e5be8" />
+          Visualizar
+        </Link>
+        <Link to="/encomendas/Editar">
+          <MdModeEdit size={15} color="#4d85ee" />
+          Editar
+        </Link>
+        <Link to="/encomendas/Excluir">
+          <MdDeleteForever size={15} color="#de3b3b" />
+          Excluir
+        </Link>
+      </ActionCell>
     </tr>
   );
 }
