@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { Route } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 
 import ContainerPage from '~/components/ContainerPage';
@@ -6,6 +7,8 @@ import ActionRow from '~/components/ActionRow';
 import SearchInput from '~/components/SearchInput';
 import { PrimaryButton } from '~/components/Buttons';
 import Table from '~/components/Table';
+
+import Modal from '~/components/Modal';
 
 import api from '~/services/api';
 
@@ -67,6 +70,7 @@ export default function Delivery() {
           ))}
         </tbody>
       </Table>
+      <Route path="/encomendas/:id/visualizar" component={Modal} />
     </ContainerPage>
   );
 }
