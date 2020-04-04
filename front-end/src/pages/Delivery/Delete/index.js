@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import Modal from '~/components/Modal';
+import DeletePageContent from '~/components/DeletePageContent';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
-import { Text } from './styles';
+import { getDataRequest } from '~/store/modules/delivery/actions';
 
 export default function Delete() {
   const [delivery, setDelivery] = useState({});
+  const dispatch = useDispatch();
   const { id } = useParams();
+
+  async function handleDelete() {
+    await api.delete(`/orders/${id}`);
+    history.push('/encomendas');
+    dispatch(getDataRequest());
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -21,7 +31,7 @@ export default function Delete() {
 
   return (
     <Modal backTo="/encomendas">
-      <Text>
+      <DeletePageContent backTo="/encomendas" onConfirm={handleDelete}>
         Confirma a exclusão da Encomenda referente ao produto{' '}
         <strong>{delivery.product}</strong> com destino à{' '}
         <strong>
@@ -29,7 +39,7 @@ export default function Delete() {
           {delivery.recipient?.state}
         </strong>{' '}
         ?
-      </Text>
+      </DeletePageContent>
     </Modal>
   );
 }

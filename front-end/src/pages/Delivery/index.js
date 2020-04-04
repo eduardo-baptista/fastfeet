@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 
@@ -9,11 +10,9 @@ import { PrimaryButton } from '~/components/Buttons';
 import Table from '~/components/Table';
 import EmptyTableIndicator from '~/components/EmptyTableIndicator';
 
-import api from '~/services/api';
 import history from '~/services/history';
 
-import formatId from '~/utils/formatId';
-
+import { getDataRequest } from '~/store/modules/delivery/actions';
 // subpages
 import Show from './Show';
 import Delete from './Delete';
@@ -21,22 +20,10 @@ import Delete from './Delete';
 import DeliveryTableRow from './DeliveryTableRow';
 
 export default function Delivery() {
-  const [deliveries, setDeliveries] = useState([]);
+  const deliveries = useSelector((store) => store.delivery.deliveries);
+  const dispatch = useDispatch();
   const [filter, setFilter] = useState('');
   const hasData = useMemo(() => deliveries.length > 0, [deliveries]);
-
-  const formatData = useCallback((deliveriesToFormat) => {
-    return deliveriesToFormat.map((delivery) => {
-      delivery.status = delivery.status.toUpperCase();
-      delivery.maskedId = formatId(delivery.id);
-      return delivery;
-    });
-  }, []);
-
-  const fetchData = useCallback(async () => {
-    const { data } = await api.get('/orders', { params: { q: filter } });
-    setDeliveries(formatData(data));
-  }, [formatData, filter]);
 
   function handleCreateClickButton(e) {
     e.preventDefault();
@@ -45,8 +32,8 @@ export default function Delivery() {
   }
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    dispatch(getDataRequest(filter));
+  }, [dispatch, filter]);
 
   return (
     <ContainerPage title="Gerenciando encomendas">
