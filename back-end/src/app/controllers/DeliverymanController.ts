@@ -34,7 +34,10 @@ class DeliverymanController {
 
     const where: WhereOptions = q ? { name: { [Op.iLike]: q } } : {};
 
-    const deliverymen = await Deliveryman.findAll({ where });
+    const deliverymen = await Deliveryman.findAll({
+      where,
+      order: [['created_at', 'DESC']],
+    });
 
     return res.json(deliverymen);
   }

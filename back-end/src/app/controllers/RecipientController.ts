@@ -28,7 +28,10 @@ class RecipientController {
 
     const where: WhereOptions = q ? { name: { [Op.iLike]: q } } : {};
 
-    const recipients = await Recipient.findAll({ where });
+    const recipients = await Recipient.findAll({
+      where,
+      order: [['created_at', 'DESC']],
+    });
 
     return res.json(recipients);
   }

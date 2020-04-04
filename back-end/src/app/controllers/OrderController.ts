@@ -18,12 +18,10 @@ class OrderController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['name', 'city', 'state', 'street', 'number', 'cep'],
         },
         {
           model: Deliveryman,
           as: 'deliveryman',
-          attributes: ['name'],
         },
         {
           model: File,
@@ -104,6 +102,7 @@ class OrderController {
           attributes: ['name'],
         },
       ],
+      order: [['created_at', 'DESC']],
     });
 
     return res.json(orders);

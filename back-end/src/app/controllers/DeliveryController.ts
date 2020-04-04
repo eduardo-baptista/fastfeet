@@ -24,6 +24,7 @@ class DeliveryController {
         deliveryman_id: deliverymanid,
         ...filters,
       },
+      order: [['created_at', 'DESC']],
     });
 
     return res.json(orders);
