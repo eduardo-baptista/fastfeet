@@ -23,10 +23,13 @@ export default function Select({ label, name, ...rest }) {
         }
 
         if (!ref.select.state.value) {
-          return '';
+          return null;
         }
 
         return ref.select.state.value.value;
+      },
+      setValue(ref, value) {
+        ref.select.select.setValue(value);
       },
     });
   }, [fieldName, registerField, rest.isMulti]);
@@ -40,6 +43,8 @@ export default function Select({ label, name, ...rest }) {
         ref={selectRef}
         classNamePrefix="react-select"
         id={name}
+        noOptionsMessage={() => 'Ops, não encontramos nada por aqui'}
+        loadingMessage={() => 'carregando...'}
         {...rest}
       />
       {error && <Error>{error}</Error>}

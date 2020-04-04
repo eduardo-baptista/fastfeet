@@ -1,35 +1,28 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
 import { MdMoreHoriz } from 'react-icons/md';
 import PropTypes from 'prop-types';
 
-import { Button, Menu } from './styles';
+import Menu from './Menu';
+import { Button } from './styles';
 
 export default function ActionCell({ children }) {
   const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef(null);
 
-  const handleClick = useCallback((e) => {
-    if (!menuRef.current.contains(e.target)) setIsOpen(false);
-    document.removeEventListener('click', handleClick);
-  }, []);
+  function closeMenu() {
+    setIsOpen(false);
+  }
 
   function handleClickEvent(e) {
     e.stopPropagation();
     setIsOpen(!isOpen);
   }
 
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('click', handleClick);
-    }
-  }, [isOpen, handleClick]);
-
   return (
     <td>
-      <Button type="button" onClick={handleClickEvent} ref={menuRef}>
+      <Button type="button" onClick={handleClickEvent}>
         <MdMoreHoriz color="#c6c6c6" size={22} />
 
-        {isOpen && <Menu>{children}</Menu>}
+        {isOpen && <Menu closeMenu={closeMenu}>{children}</Menu>}
       </Button>
     </td>
   );

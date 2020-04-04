@@ -14,6 +14,7 @@ export const Status = styled.span`
   line-height: 1.36;
   font-size: 14px;
   padding: 4px 10px 4px 22px;
+  white-space: nowrap;
 
   color: ${(props) => statusColors[props.children].text};
   background-color: ${(props) => statusColors[props.children].background};

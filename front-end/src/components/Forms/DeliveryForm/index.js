@@ -9,6 +9,18 @@ import Select from '~/components/Select';
 import api from '~/services/api';
 
 const DeliveryForm = React.forwardRef(({ title, backTo, ...rest }, ref) => {
+  async function fetchRecipients(filter) {
+    const { data } = await api.get('/recipients', {
+      params: { q: filter },
+    });
+
+    return data.map((recipient) => ({
+      value: recipient.id,
+      label: recipient.name,
+    }));
+  }
+  const promiseRecipients = (inputValue) => fetchRecipients(inputValue);
+
   async function fetchDeliverymen(filter) {
     const { data } = await api.get('/deliverymen', {
       params: { q: filter },
@@ -19,8 +31,7 @@ const DeliveryForm = React.forwardRef(({ title, backTo, ...rest }, ref) => {
       label: deliverman.name,
     }));
   }
-
-  const promiseOptions = (inputValue) => fetchDeliverymen(inputValue);
+  const promiseDeliverymen = (inputValue) => fetchDeliverymen(inputValue);
 
   return (
     <Form title={title} backTo={backTo} ref={ref} {...rest}>
@@ -30,14 +41,14 @@ const DeliveryForm = React.forwardRef(({ title, backTo, ...rest }, ref) => {
           label="Destinatário"
           defaultOptions
           placeholder="Ludwig van Beethoven"
-          loadOptions={promiseOptions}
+          loadOptions={promiseRecipients}
         />
         <Select
           name="deliveryman_id"
           label="Entregador"
           defaultOptions
           placeholder="John Doe"
-          loadOptions={promiseOptions}
+          loadOptions={promiseDeliverymen}
         />
       </Row>
       <Row>
