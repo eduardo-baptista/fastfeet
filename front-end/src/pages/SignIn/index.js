@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // components
 import Input from '~/components/Input';
-import Form from '~/components/Form';
 import Loader from '~/components/Loader';
-import { Logo, SigninButton } from './styles';
+import { Logo, SigninButton, Form } from './styles';
 
 // assets
 import logo from '~/assets/fastfeet-logo.png';
@@ -38,7 +37,7 @@ export default function SignIn() {
       dispatch(signInRequest(data.email, data.password));
     } catch (err) {
       const validationErrors = formatErrors(err);
-      validationErrors && formRef.current.setErrors(validationErrors);
+      if (validationErrors) formRef.current.setErrors(validationErrors);
     }
   }
   return (

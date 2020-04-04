@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
+import { Form as UnformForm } from '@unform/web';
 import { DefaultButton } from '~/components/Buttons';
 
 export const Logo = styled.img`
@@ -16,4 +17,8 @@ export const SigninButton = styled(DefaultButton)`
   &:hover {
     background-color: ${darken(0.2, '#7d40e7')};
   }
+`;
+
+export const Form = styled(UnformForm)`
+  width: 100%;
 `;

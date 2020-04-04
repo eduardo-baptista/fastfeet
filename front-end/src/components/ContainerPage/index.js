@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import { Container, Title } from './styles';
 
-export default function ContainerPage({ maxWidth, title, children }) {
+export default function ContainerPage({ title, children }) {
   return (
-    <Container maxWidth={maxWidth}>
+    <Container>
       <Title>{title}</Title>
       {children}
     </Container>
@@ -13,14 +13,9 @@ export default function ContainerPage({ maxWidth, title, children }) {
 }
 
 ContainerPage.propTypes = {
-  maxWidth: PropTypes.string,
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.any),
   ]).isRequired,
-};
-
-ContainerPage.defaultProps = {
-  maxWidth: '1200px',
 };

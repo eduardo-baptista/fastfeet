@@ -6,11 +6,17 @@ import Route from './Route';
 // pages
 import SignIn from '~/pages/SignIn';
 import Delivery from '~/pages/Delivery';
+import CreateDelivery from '~/pages/Delivery/Create';
 
 export default function routes() {
   return (
     <Switch>
       <Route path="/" exact component={SignIn} />
+      <Route
+        path="/encomendas/cadastrar"
+        component={CreateDelivery}
+        isPrivate
+      />
       <Route path="/encomendas" component={Delivery} isPrivate />
       <Route path="*">
         <Redirect to="/" />

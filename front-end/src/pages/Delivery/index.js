@@ -10,6 +10,7 @@ import Table from '~/components/Table';
 import EmptyTableIndicator from '~/components/EmptyTableIndicator';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 import formatId from '~/utils/formatId';
 
@@ -36,6 +37,12 @@ export default function Delivery() {
     setDeliveries(formatData(data));
   }, [formatData, filter]);
 
+  function handleCreateClickButton(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    history.push('/encomendas/cadastrar');
+  }
+
   useEffect(() => {
     fetchData();
   }, [fetchData]);
@@ -49,7 +56,7 @@ export default function Delivery() {
           onChange={(e) => setFilter(e.target.value)}
         />
 
-        <PrimaryButton type="button">
+        <PrimaryButton type="button" onClick={handleCreateClickButton}>
           <MdAdd size={22} />
           CADASTRAR
         </PrimaryButton>
