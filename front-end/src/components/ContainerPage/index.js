@@ -17,7 +17,7 @@ ContainerPage.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.arrayOf(PropTypes.any),
   ]).isRequired,
 };
 

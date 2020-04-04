@@ -117,6 +117,7 @@ routes.put(
   OrderController.update
 );
 routes.get('/orders', OrderController.index);
+routes.get('/orders/:id', OrderController.show);
 routes.delete('/orders/:id', OrderController.delete);
 
 export default routes;

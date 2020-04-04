@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { Route } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 
@@ -7,18 +7,21 @@ import ActionRow from '~/components/ActionRow';
 import SearchInput from '~/components/SearchInput';
 import { PrimaryButton } from '~/components/Buttons';
 import Table from '~/components/Table';
-
-import Modal from '~/components/Modal';
+import EmptyTableIndicator from '~/components/EmptyTableIndicator';
 
 import api from '~/services/api';
 
 import formatId from '~/utils/formatId';
+
+// subpages
+import Show from './Show';
 
 import DeliveryTableRow from './DeliveryTableRow';
 
 export default function Delivery() {
   const [deliveries, setDeliveries] = useState([]);
   const [filter, setFilter] = useState('');
+  const hasData = useMemo(() => deliveries.length > 0, [deliveries]);
 
   const formatData = useCallback((deliveriesToFormat) => {
     return deliveriesToFormat.map((delivery) => {
@@ -70,7 +73,8 @@ export default function Delivery() {
           ))}
         </tbody>
       </Table>
-      <Route path="/encomendas/:id/visualizar" component={Modal} />
+      {!hasData && <EmptyTableIndicator />}
+      <Route path="/encomendas/:id/visualizar" component={Show} />
     </ContainerPage>
   );
 }

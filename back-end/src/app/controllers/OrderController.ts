@@ -5,10 +5,39 @@ import Order from '@models/Order';
 import Queue from '@libs/Queue';
 import Deliveryman from '@models/Deliveryman';
 import Recipient from '@models/Recipient';
+import File from '@models/File';
 
 import CreateOrderMail from '@jobs/CreateOrderMail';
 
 class OrderController {
+  async show(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const order = await Order.findByPk(id, {
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['name', 'city', 'state', 'street', 'number', 'cep'],
+        },
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['name'],
+        },
+        {
+          model: File,
+          as: 'signature',
+          attributes: ['path'],
+        },
+      ],
+    });
+
+    if (!order) res.status(400).json({ error: 'order did not find' });
+
+    return res.json(order);
+  }
+
   async store(req: Request, res: Response): Promise<Response> {
     const { deliveryman_id, recipient_id } = req.body;
 

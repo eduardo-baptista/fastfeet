@@ -20,6 +20,7 @@ export default function Modal({ children, backTo }) {
 }
 
 Modal.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array])
+    .isRequired,
   backTo: PropTypes.string.isRequired,
 };
