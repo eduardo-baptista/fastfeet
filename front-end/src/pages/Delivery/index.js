@@ -16,6 +16,7 @@ import formatId from '~/utils/formatId';
 
 // subpages
 import Show from './Show';
+import Delete from './Delete';
 
 import DeliveryTableRow from './DeliveryTableRow';
 
@@ -82,6 +83,7 @@ export default function Delivery() {
       </Table>
       {!hasData && <EmptyTableIndicator />}
       <Route path="/encomendas/:id/visualizar" component={Show} />
+      <Route path="/encomendas/:id/excluir" component={Delete} />
     </ContainerPage>
   );
 }
