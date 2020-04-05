@@ -1,15 +1,16 @@
 import React, { useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { toast } from 'react-toastify';
 
-import { DeliveryForm } from '~/components/Forms';
+import { DeliverymanForm } from '~/components/Forms';
 
 import formatErrors from '~/utils/formatErrors';
 
 import api from '~/services/api';
 import history from '~/services/history';
 
-import schema from '~/Validations/Delivery';
+import schema from '~/Validations/Deliveryman';
 
 export default function Edit() {
   const formRef = useRef(null);
@@ -17,16 +18,12 @@ export default function Edit() {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await api.get(`orders/${id}`);
+      const { data } = await api.get(`deliverymen/${id}`);
+
+      if (data.avatar) {
+        data.uploaded_file = `${process.env.REACT_APP_API}/files/${data.avatar?.path}`;
+      }
       formRef.current.setData(data);
-      formRef.current.setFieldValue('recipient_id', {
-        value: data.recipient.id,
-        label: data.recipient.name,
-      });
-      formRef.current.setFieldValue('deliveryman_id', {
-        value: data.deliveryman?.id,
-        label: data.deliveryman?.name,
-      });
     }
     fetchData();
   }, [id]);
@@ -35,23 +32,33 @@ export default function Edit() {
     try {
       await schema.validate(data, { abortEarly: false });
       formRef.current.setErrors({});
-      await api.put(`/orders/${id}`, data);
-      history.push('/encomendas');
-      toast.success('Enconmenda editada com sucesso.');
+
+      if (data.uploaded_file) {
+        const formData = new FormData();
+        formData.append('file', data.uploaded_file);
+        const response = await api.post('/files', formData);
+
+        data.avatar_id = response.data.id;
+        data.uploaded_file = null;
+      }
+
+      await api.put(`/deliverymen/${id}`, data);
+      history.push('/entregadores');
+      toast.success('Entregador editador com sucesso.');
     } catch (err) {
       const validationErrors = formatErrors(err);
       if (validationErrors) {
         formRef.current.setErrors(validationErrors);
         return;
       }
-      toast.error('Não foi possível editar a Encomenda');
+      toast.error('Não foi possível editar o Entregador');
     }
   }
 
   return (
-    <DeliveryForm
-      title="Edição de encomendas"
-      backTo="/encomendas"
+    <DeliverymanForm
+      title="Edição de entregadores"
+      backTo="/entregadores"
       onSubmit={handleSubmit}
       ref={formRef}
     />

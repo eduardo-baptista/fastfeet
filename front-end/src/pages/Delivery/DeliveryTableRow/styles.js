@@ -45,7 +45,8 @@ export const AvatarItem = styled.div`
     white-space: nowrap;
   }
 
-  > div {
+  > div,
+  > img {
     margin-right: 5px;
   }
 `;

@@ -12,3 +12,7 @@ export const Button = styled.button`
 
   position: relative;
 `;
+
+export const Cell = styled.td`
+  width: 105px;
+`;

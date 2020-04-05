@@ -2,8 +2,21 @@ import { Request, Response } from 'express';
 import { Op, WhereOptions } from 'sequelize';
 
 import Deliveryman from '@models/Deliveryman';
+import File from '@models/File';
 
 class DeliverymanController {
+  async show(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const deliveryman = await Deliveryman.findByPk(id, {
+      include: [{ model: File, as: 'avatar', attributes: ['path'] }],
+    });
+
+    if (!deliveryman)
+      return res.status(400).json({ error: 'Deliveryman did not find' });
+
+    return res.json(deliveryman);
+  }
+
   async store(req: Request, res: Response): Promise<Response> {
     const { email } = req.body;
 
@@ -36,6 +49,7 @@ class DeliverymanController {
 
     const deliverymen = await Deliveryman.findAll({
       where,
+      include: [{ model: File, as: 'avatar' }],
       order: [['created_at', 'DESC']],
     });
 

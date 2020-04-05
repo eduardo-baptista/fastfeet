@@ -3,7 +3,7 @@ import { MdMoreHoriz } from 'react-icons/md';
 import PropTypes from 'prop-types';
 
 import Menu from './Menu';
-import { Button } from './styles';
+import { Button, Cell } from './styles';
 
 export default function ActionCell({ children }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,13 +18,13 @@ export default function ActionCell({ children }) {
   }
 
   return (
-    <td>
+    <Cell>
       <Button type="button" onClick={handleClickEvent}>
         <MdMoreHoriz color="#c6c6c6" size={22} />
 
         {isOpen && <Menu closeMenu={closeMenu}>{children}</Menu>}
       </Button>
-    </td>
+    </Cell>
   );
 }
 

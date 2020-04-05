@@ -100,6 +100,7 @@ class OrderController {
           model: Deliveryman,
           as: 'deliveryman',
           attributes: ['name'],
+          include: [{ model: File, as: 'avatar', attributes: ['path'] }],
         },
       ],
       order: [['created_at', 'DESC']],

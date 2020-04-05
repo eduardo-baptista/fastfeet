@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import Modal from '~/components/Modal';
 import DeletePageContent from '~/components/DeletePageContent';
@@ -16,9 +17,14 @@ export default function Delete() {
   const { id } = useParams();
 
   async function handleDelete() {
-    await api.delete(`/orders/${id}`);
-    history.push('/encomendas');
-    dispatch(getDataRequest());
+    try {
+      await api.delete(`/orders/${id}`);
+      history.push('/encomendas');
+      dispatch(getDataRequest());
+      toast.success('Encomenda deletada com sucesso');
+    } catch (err) {
+      toast.error('Não foi possível deletar a encomenda');
+    }
   }
 
   useEffect(() => {

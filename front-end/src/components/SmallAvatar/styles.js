@@ -17,3 +17,10 @@ export const Container = styled.div`
   color: ${(props) => props.color};
   background-color: ${(props) => lighten(0.65, props.color)};
 `;
+
+export const Img = styled.img`
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+`;

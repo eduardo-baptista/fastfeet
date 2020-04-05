@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import randomcolor from 'randomcolor';
 
-import { Container } from './styles';
+import { Container, Img } from './styles';
 
 export default function SmallAvatar({ url, name }) {
   const getInitials = useCallback((nameToGet) => {
@@ -16,6 +16,11 @@ export default function SmallAvatar({ url, name }) {
     name,
     getInitials,
   ]);
+
+  if (url)
+    return (
+      <Img src={`${process.env.REACT_APP_API}/files/${url}`} alt="avatar" />
+    );
 
   return (
     <Container color={randomcolor({ luminosity: 'dark' })}>

@@ -15,10 +15,15 @@ export default function DeliveryTableRow({ delivery }) {
       <TextBodyCell>{delivery.product}</TextBodyCell>
       <TextBodyCell>{delivery.recipient.name}</TextBodyCell>
       <td>
-        <AvatarItem>
-          <SmallAvatar name={delivery.deliveryman.name} />
-          <span>{delivery.deliveryman.name}</span>
-        </AvatarItem>
+        {delivery.deliveryman && (
+          <AvatarItem>
+            <SmallAvatar
+              name={delivery.deliveryman.name}
+              url={delivery.deliveryman.avatar?.path}
+            />
+            <span>{delivery.deliveryman.name}</span>
+          </AvatarItem>
+        )}
       </td>
       <TextBodyCell>{delivery.recipient.city}</TextBodyCell>
       <TextBodyCell>{delivery.recipient.state}</TextBodyCell>
@@ -45,11 +50,11 @@ export default function DeliveryTableRow({ delivery }) {
 
 DeliveryTableRow.propTypes = {
   delivery: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    product: PropTypes.string.isRequired,
-    maskedId: PropTypes.string.isRequired,
-    recipient: PropTypes.object.isRequired,
-    deliveryman: PropTypes.object.isRequired,
-    status: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    product: PropTypes.string,
+    maskedId: PropTypes.string,
+    recipient: PropTypes.object,
+    deliveryman: PropTypes.object,
+    status: PropTypes.string,
   }).isRequired,
 };
