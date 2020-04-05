@@ -20,7 +20,10 @@ export default function Modal({ children, backTo }) {
 }
 
 Modal.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array])
-    .isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.any]),
   backTo: PropTypes.string.isRequired,
+};
+
+Modal.defaultProps = {
+  children: null,
 };

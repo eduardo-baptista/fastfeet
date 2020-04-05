@@ -12,6 +12,7 @@ import StartDeliveryController from '@controllers/StartDeliveryController';
 import EndDeliveryController from '@controllers/EndDeliveryController';
 import DeliveryProblemController from '@controllers/DeliveryProblemController';
 import CancelDeliveryController from '@controllers/CancelDeliveryController';
+import ProblemController from '@controllers/ProblemController';
 
 // validations
 import SessionStoreSchema from '@validators/SessionStore';
@@ -96,6 +97,9 @@ routes.post(
   validationMiddleware(EndDeliveryStoreSchema),
   EndDeliveryController.store
 );
+
+// list all problems
+routes.get('/problems', ProblemController.index);
 
 // list problems per order
 routes.get('/delivery/:deliveryid/problems', DeliveryProblemController.index);

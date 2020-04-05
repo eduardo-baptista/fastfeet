@@ -37,5 +37,8 @@ export default function DeletePageContent({ backTo, onConfirm, children }) {
 DeletePageContent.propTypes = {
   backTo: PropTypes.string.isRequired,
   onConfirm: PropTypes.func.isRequired,
-  children: PropTypes.arrayOf(PropTypes.any).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.any),
+  ]).isRequired,
 };

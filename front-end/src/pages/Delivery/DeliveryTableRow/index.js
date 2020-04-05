@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 import ActionCell from '~/components/ActionCell';
 import TextBodyCell from '~/components/TextBodyCell';
 import SmallAvatar from '~/components/SmallAvatar';
-import { Status, AvatarItem } from './styles';
+import Status from '~/components/Status';
+import { AvatarItem } from './styles';
 
 export default function DeliveryTableRow({ delivery }) {
   return (

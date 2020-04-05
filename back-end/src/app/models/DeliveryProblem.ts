@@ -2,10 +2,13 @@ import { Model, Sequelize, DataTypes, ModelCtor } from 'sequelize';
 
 import { ModelImplementation } from '@typings/types';
 
+import Order from '@models/Order';
+
 export interface DeliveryProblemInterface {
   readonly id: number;
   delivery_id: number;
   description: string;
+  delivery?: Order;
   readonly created_at: Date;
   readonly updated_at: Date;
 }
@@ -16,6 +19,8 @@ class DeliveryProblem extends ModelImplementation {
   delivery_id!: number;
 
   description!: string;
+
+  delivery?: Order;
 
   readonly created_at!: Date;
 

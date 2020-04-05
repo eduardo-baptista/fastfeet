@@ -8,7 +8,7 @@ export const Container = styled.div`
   position: absolute;
   top: calc(50% + 15px);
 
-  width: 150px;
+  min-width: 150px;
   padding: 11px;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.15);
   border-radius: 4px;
@@ -30,6 +30,7 @@ export const Container = styled.div`
     height: 33px;
     font-size: 16px;
     color: #999999;
+    white-space: nowrap;
 
     display: flex;
     align-items: center;

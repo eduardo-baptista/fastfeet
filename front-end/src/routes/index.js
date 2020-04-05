@@ -14,6 +14,7 @@ import EditDeliveryman from '~/pages/Deliveryman/Edit';
 import Recipient from '~/pages/Recipient';
 import CreateRecipient from '~/pages/Recipient/Create';
 import EditRecipient from '~/pages/Recipient/Edit';
+import Problem from '~/pages/Problem';
 
 export default function routes() {
   return (
@@ -51,6 +52,8 @@ export default function routes() {
         isPrivate
       />
       <Route path="/destinatarios" component={Recipient} isPrivate />
+
+      <Route path="/problemas" component={Problem} isPrivate />
 
       <Route path="*">
         <Redirect to="/" />
