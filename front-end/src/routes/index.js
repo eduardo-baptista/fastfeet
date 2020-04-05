@@ -11,6 +11,9 @@ import EditDelivery from '~/pages/Delivery/Edit';
 import Deliveryman from '~/pages/Deliveryman';
 import CreateDeliveryman from '~/pages/Deliveryman/Create';
 import EditDeliveryman from '~/pages/Deliveryman/Edit';
+import Recipient from '~/pages/Recipient';
+import CreateRecipient from '~/pages/Recipient/Create';
+import EditRecipient from '~/pages/Recipient/Edit';
 
 export default function routes() {
   return (
@@ -36,6 +39,18 @@ export default function routes() {
         isPrivate
       />
       <Route path="/entregadores" component={Deliveryman} isPrivate />
+
+      <Route
+        path="/destinatarios/cadastrar"
+        component={CreateRecipient}
+        isPrivate
+      />
+      <Route
+        path="/destinatarios/:id/editar"
+        component={EditRecipient}
+        isPrivate
+      />
+      <Route path="/destinatarios" component={Recipient} isPrivate />
 
       <Route path="*">
         <Redirect to="/" />

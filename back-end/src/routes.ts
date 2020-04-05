@@ -49,6 +49,7 @@ routes.post('/files', upload.single('file'), FileController.store);
 
 // recipients CRUD
 routes.get('/recipients', RecipientController.index);
+routes.get('/recipients/:id', RecipientController.show);
 routes.post(
   '/recipients',
   validationMiddleware(RecipientStoreSchema),

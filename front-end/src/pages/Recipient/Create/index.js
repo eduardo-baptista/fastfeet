@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
 import { toast } from 'react-toastify';
 
-import { DeliverymanForm } from '~/components/Forms';
-
 import formatErrors from '~/utils/formatErrors';
+
+import { RecipientForm } from '~/components/Forms';
 
 import api from '~/services/api';
 import history from '~/services/history';
 
-import schema from '~/Validations/Deliveryman';
+import schema from '~/Validations/Recipient';
 
 export default function Create() {
   const formRef = useRef(null);
@@ -18,32 +18,25 @@ export default function Create() {
       await schema.validate(data, { abortEarly: false });
       formRef.current.setErrors({});
 
-      if (data.uploaded_file) {
-        const formData = new FormData();
-        formData.append('file', data.uploaded_file);
-        const response = await api.post('/files', formData);
+      data.cep = data.cep.replace(/\D/, '');
 
-        data.avatar_id = response.data.id;
-        data.uploaded_file = null;
-      }
-
-      await api.post('/deliverymen', data);
-      history.push('/entregadores');
-      toast.success('Entregador criado com sucesso.');
+      await api.post('/recipients', data);
+      history.push('/destinatarios');
+      toast.success('Destinatário criada com sucesso.');
     } catch (err) {
       const validationErrors = formatErrors(err);
       if (validationErrors) {
         formRef.current.setErrors(validationErrors);
         return;
       }
-      toast.error('Não foi possível criar o Entregador');
+      toast.error('Não foi possível criar o Destinatário');
     }
   }
 
   return (
-    <DeliverymanForm
-      title="Cadastro de entregadores"
-      backTo="/entregadores"
+    <RecipientForm
+      title="Cadastro de destinatários"
+      backTo="/destinatarios"
       onSubmit={handleSubmit}
       ref={formRef}
     />

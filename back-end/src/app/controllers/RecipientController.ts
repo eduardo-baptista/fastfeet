@@ -4,6 +4,17 @@ import { Op, WhereOptions } from 'sequelize';
 import Recipient from '@models/Recipient';
 
 class RecipientController {
+  async show(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const recipient = await Recipient.findByPk(id);
+
+    if (!recipient)
+      return res.status(400).json({ error: 'Recipient did not find' });
+
+    return res.json(recipient);
+  }
+
   async store(req: Request, res: Response): Promise<Response> {
     const recipient = await Recipient.create(req.body);
 

@@ -21,7 +21,7 @@ export default function Delete() {
       await api.delete(`/deliverymen/${id}`);
       history.push('/entregadores');
       dispatch(getDataRequest());
-      toast.success('Entregador deletada com sucesso');
+      toast.success('Entregador deletado com sucesso');
     } catch (err) {
       toast.error('Não foi possível deletar o entregador');
     }

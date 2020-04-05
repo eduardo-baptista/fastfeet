@@ -4,11 +4,8 @@ const schema = Yup.object().shape({
   name: Yup.string().required(),
   street: Yup.string().required(),
   number: Yup.number().required(),
-  complement: Yup.string().required(),
-  state: Yup.string()
-    .max(2)
-    .min(2)
-    .required(),
+  complement: Yup.string(),
+  state: Yup.string().required(),
   city: Yup.string().required(),
   cep: Yup.string()
     .min(8)
