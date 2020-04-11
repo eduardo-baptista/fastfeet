@@ -1,12 +1,9 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import createRouter from './routes';
 
 const App = () => {
-  return (
-    <View>
-      <Text>My beatifull app</Text>
-    </View>
-  );
+  const signed = false;
+
+  return createRouter(signed);
 };
 
 export default App;
