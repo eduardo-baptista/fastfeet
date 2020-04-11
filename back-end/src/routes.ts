@@ -42,6 +42,9 @@ routes.post(
   SessionController.store
 );
 
+// routes used on mobile app
+routes.get('/deliverymen/:id', DeliverymanController.show);
+
 // auth
 routes.use(authMiddleware);
 
@@ -75,7 +78,6 @@ routes.put(
   DeliverymanController.update
 );
 routes.get('/deliverymen', DeliverymanController.index);
-routes.get('/deliverymen/:id', DeliverymanController.show);
 routes.delete('/deliverymen/:id', DeliverymanController.delete);
 
 // show order per deliveryman
