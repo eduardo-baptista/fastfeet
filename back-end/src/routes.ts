@@ -44,6 +44,8 @@ routes.post(
 
 // routes used on mobile app
 routes.get('/deliverymen/:id', DeliverymanController.show);
+// show order per deliveryman
+routes.get('/deliveryman/:deliverymanid/deliveries', DeliveryController.index);
 
 // auth
 routes.use(authMiddleware);
@@ -79,9 +81,6 @@ routes.put(
 );
 routes.get('/deliverymen', DeliverymanController.index);
 routes.delete('/deliverymen/:id', DeliverymanController.delete);
-
-// show order per deliveryman
-routes.get('/deliveryman/:deliverymanid/deliveries', DeliveryController.index);
 
 // start delivery
 routes.post(
