@@ -84,7 +84,11 @@ export default function Dashboard() {
       <WhiteBackground>
         <Content>
           <Header>
-            <Avatar size={68} />
+            <Avatar
+              size={68}
+              url={deliveryman.avatar?.path}
+              name={deliveryman.name}
+            />
             <HeaderInfo>
               <HeaderText>Bem vindo de volta,</HeaderText>
               <HeaderName>{deliveryman.name}</HeaderName>
