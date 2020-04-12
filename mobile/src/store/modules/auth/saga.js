@@ -1,5 +1,6 @@
 import { Alert } from 'react-native';
 import { takeLatest, call, put, all } from 'redux-saga/effects';
+import { format, parseISO } from 'date-fns';
 
 // services
 import api from '~/services/api';
@@ -11,9 +12,11 @@ export function* signIn({ payload }) {
   try {
     const { id } = payload;
 
-    const response = yield call(api.get, `deliverymen/${id}`);
+    const { data } = yield call(api.get, `deliverymen/${id}`);
 
-    const user = response.data;
+    data.createdAt = format(parseISO(data.createdAt), 'dd/MM/yyyy');
+
+    const user = data;
 
     yield put(signInSuccess(id, user));
   } catch (error) {

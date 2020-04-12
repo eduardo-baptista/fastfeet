@@ -86,6 +86,7 @@ export default function Dashboard() {
           <Header>
             <Avatar
               size={68}
+              fontSize={31}
               url={deliveryman.avatar?.path}
               name={deliveryman.name}
             />

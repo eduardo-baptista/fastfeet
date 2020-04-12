@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Text = styled.Text`
   color: #a28fd0;
-  font-size: 31px;
+  font-size: ${(props) => props.fontSize}px;
 `;
 
 export const Image = styled.Image`

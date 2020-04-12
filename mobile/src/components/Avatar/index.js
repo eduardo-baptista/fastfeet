@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Container, Text, Image } from './styles';
 
-export default function Avatar({ size, url, name }) {
+export default function Avatar({ size, fontSize, url, name, ...rest }) {
   const getInitials = useCallback((nameToGet) => {
     const names = nameToGet.split(' ');
     if (names.length < 2) return nameToGet.substring(0, 2).toUpperCase();
@@ -17,7 +17,7 @@ export default function Avatar({ size, url, name }) {
   ]);
 
   return (
-    <Container size={size}>
+    <Container size={size} {...rest}>
       {url ? (
         <Image
           size={size}
@@ -27,7 +27,7 @@ export default function Avatar({ size, url, name }) {
           }}
         />
       ) : (
-        <Text>{initials}</Text>
+        <Text fontSize={fontSize}>{initials}</Text>
       )}
     </Container>
   );
@@ -35,6 +35,7 @@ export default function Avatar({ size, url, name }) {
 
 Avatar.propTypes = {
   size: PropTypes.number.isRequired,
+  fontSize: PropTypes.number.isRequired,
   url: PropTypes.string,
   name: PropTypes.string.isRequired,
 };
