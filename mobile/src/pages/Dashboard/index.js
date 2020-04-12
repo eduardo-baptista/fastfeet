@@ -95,7 +95,7 @@ export default function Dashboard() {
               <HeaderName>{deliveryman.name}</HeaderName>
             </HeaderInfo>
             <TouchableOpacity onPressIn={handleLogout}>
-              <Icon name="exit-to-app" color="#e74040" size={25} />
+              <Icon name="exit-to-app" color="#e74040" size={24} />
             </TouchableOpacity>
           </Header>
           <ListHeader>

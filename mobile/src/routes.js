@@ -8,9 +8,35 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import SignIn from '~/pages/SignIn';
 import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
+import Details from '~/pages/Details';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
+
+function DeliveryRoutes() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerBackTitleVisible: false,
+        headerTitleAlign: 'center',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontSize: 16,
+        },
+        headerTintColor: '#ffffff',
+        headerTransparent: true,
+      }}
+      initialRouteName="Dashoard"
+    >
+      <Stack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Details" component={Details} />
+    </Stack.Navigator>
+  );
+}
 
 export default function createRouter(isSigned = false) {
   return !isSigned ? (
@@ -33,11 +59,11 @@ export default function createRouter(isSigned = false) {
     >
       <Tabs.Screen
         name="Dashboard"
-        component={Dashboard}
+        component={DeliveryRoutes}
         options={{
           tabBarLabel: 'Entregas',
           tabBarIcon: ({ color }) => (
-            <Icon name="reorder" size={20} color={color} />
+            <Icon name="reorder" size={24} color={color} />
           ),
         }}
       />
@@ -46,8 +72,9 @@ export default function createRouter(isSigned = false) {
         component={Profile}
         options={{
           tabBarLabel: 'Meu Perfil',
+          unmountOnBlur: true,
           tabBarIcon: ({ color }) => (
-            <Icon name="account-circle" size={20} color={color} />
+            <Icon name="account-circle" size={24} color={color} />
           ),
         }}
       />

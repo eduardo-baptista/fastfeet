@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
 import {
@@ -17,8 +18,16 @@ import {
 } from './styles';
 
 export default function DeliveryCard({ data }) {
+  const navigation = useNavigation();
+
+  function goToDetails() {
+    navigation.navigate('Details', {
+      id: data.id,
+    });
+  }
+
   return (
-    <Card icon="local-shipping" title={`Encomenda ${data.id}`}>
+    <Card icon="local-shipping" title={`Encomenda ${data.formatedId}`}>
       <TimeLine>
         <Line />
         <Step>
@@ -43,7 +52,7 @@ export default function DeliveryCard({ data }) {
           <FooterInfoTitle>Cidade</FooterInfoTitle>
           <FooterInfoText>{data.recipient.city}</FooterInfoText>
         </FooterInfo>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={goToDetails}>
           <FooterDetailsButtonText>Ver Detalhes</FooterDetailsButtonText>
         </TouchableOpacity>
       </Footer>
@@ -53,7 +62,8 @@ export default function DeliveryCard({ data }) {
 
 DeliveryCard.propTypes = {
   data: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
+    formatedId: PropTypes.string,
     statusLevel: PropTypes.number,
     created_at: PropTypes.string,
     recipient: PropTypes.object,

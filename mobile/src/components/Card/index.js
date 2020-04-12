@@ -8,7 +8,7 @@ export default function Card({ icon, title, children, ...rest }) {
   return (
     <Container {...rest}>
       <TitleContainer>
-        <Icon name={icon} size={22} color="#7d40e7" />
+        <Icon name={icon} size={24} color="#7d40e7" />
         <Title>{title}</Title>
       </TitleContainer>
       {children}

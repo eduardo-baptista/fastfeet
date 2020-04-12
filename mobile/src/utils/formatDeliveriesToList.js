@@ -9,7 +9,7 @@ const statusLevels = {
 
 export default function formatDeliveriesToList(deliveries) {
   return deliveries.map((delivery) => {
-    delivery.id = formatId(delivery.id);
+    delivery.formatedId = formatId(delivery.id);
     delivery.created_at = format(parseISO(delivery.created_at), 'dd/MM/yyyy');
     delivery.statusLevel = statusLevels[delivery.status];
     return delivery;
