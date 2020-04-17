@@ -40,6 +40,7 @@ export default function Dashboard() {
 
   const loadDeliveries = useCallback(async () => {
     setLoading(true);
+    setPage(1);
     const response = await api.get(`deliveryman/${deliveryman.id}/deliveries`, {
       params: { finished: finished ? true : '' },
     });

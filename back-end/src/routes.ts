@@ -42,16 +42,34 @@ routes.post(
   SessionController.store
 );
 
+// file upload
+routes.post('/files', upload.single('file'), FileController.store);
+
 // routes used on mobile app
 routes.get('/deliverymen/:id', DeliverymanController.show);
 // show order per deliveryman
 routes.get('/deliveryman/:deliverymanid/deliveries', DeliveryController.index);
+routes.get('/orders/:id', OrderController.show);
+
+// end delivery
+routes.post(
+  '/deliveries/end',
+  validationMiddleware(EndDeliveryStoreSchema),
+  EndDeliveryController.store
+);
+
+// list problems per order
+routes.get('/delivery/:deliveryid/problems', DeliveryProblemController.index);
+
+// create new problem
+routes.post(
+  '/delivery/:deliveryid/problems',
+  validationMiddleware(DeliveryProblemStoreSchema),
+  DeliveryProblemController.store
+);
 
 // auth
 routes.use(authMiddleware);
-
-// file upload
-routes.post('/files', upload.single('file'), FileController.store);
 
 // recipients CRUD
 routes.get('/recipients', RecipientController.index);
@@ -92,25 +110,8 @@ routes.post(
 // cancel delivery by problem id
 routes.delete('/problem/:id/cancel-delivery', CancelDeliveryController.delete);
 
-// end delivery
-routes.post(
-  '/deliveries/end',
-  validationMiddleware(EndDeliveryStoreSchema),
-  EndDeliveryController.store
-);
-
 // list all problems
 routes.get('/problems', ProblemController.index);
-
-// list problems per order
-routes.get('/delivery/:deliveryid/problems', DeliveryProblemController.index);
-
-// create new problem
-routes.post(
-  '/delivery/:deliveryid/problems',
-  validationMiddleware(DeliveryProblemStoreSchema),
-  DeliveryProblemController.store
-);
 
 // order CRUD
 routes.post(
@@ -124,7 +125,6 @@ routes.put(
   OrderController.update
 );
 routes.get('/orders', OrderController.index);
-routes.get('/orders/:id', OrderController.show);
 routes.delete('/orders/:id', OrderController.delete);
 
 export default routes;

@@ -3,12 +3,16 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // pages
 import SignIn from '~/pages/SignIn';
 import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
 import Details from '~/pages/Details';
+import Problem from '~/pages/Problem';
+import ShowProblems from '~/pages/ShowProblems';
+import ConfirmDelivery from '~/pages/ConfirmDelivery';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -23,17 +27,68 @@ function DeliveryRoutes() {
           fontWeight: 'bold',
           fontSize: 16,
         },
+        headerLeftContainerStyle: {
+          marginLeft: 16,
+        },
         headerTintColor: '#ffffff',
         headerTransparent: true,
+        gestureDirection: 'vertical-inverted',
       }}
-      initialRouteName="Dashoard"
+      initialRouteName="Dashboard"
     >
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Details" component={Details} />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          title: 'Detalhes da encomenda',
+          headerLeft: ({ onPress }) => (
+            <TouchableOpacity onPress={onPress}>
+              <Icon name="chevron-left" size={24} color="#ffffff" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Problem"
+        component={Problem}
+        options={{
+          title: 'Informar problema',
+          headerLeft: ({ onPress }) => (
+            <TouchableOpacity onPress={onPress}>
+              <Icon name="chevron-left" size={24} color="#ffffff" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="ShowProblems"
+        component={ShowProblems}
+        options={{
+          title: 'Visualizar problemas',
+          headerLeft: ({ onPress }) => (
+            <TouchableOpacity onPress={onPress}>
+              <Icon name="chevron-left" size={24} color="#ffffff" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="ConfirmDelivery"
+        component={ConfirmDelivery}
+        options={{
+          title: 'Confirmar entrega',
+          headerLeft: ({ onPress }) => (
+            <TouchableOpacity onPress={onPress}>
+              <Icon name="chevron-left" size={24} color="#ffffff" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 }
