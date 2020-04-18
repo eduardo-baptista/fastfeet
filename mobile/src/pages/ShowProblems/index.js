@@ -7,6 +7,7 @@ import formatData from '~/utils/formatData';
 import formatId from '~/utils/formatId';
 
 import { HalfPurpleBackground as Background } from '~/components/Backgrounds';
+import NoDataIndicator from '~/components/NoDataIndicator';
 import { Title, Problem, ProblemText, ProblemDate, List } from './styles';
 
 export default function ShowProblems({ route }) {
@@ -15,6 +16,7 @@ export default function ShowProblems({ route }) {
   const { id } = route.params;
 
   const formatedId = useMemo(() => formatId(id), [id]);
+  const hasData = useMemo(() => problems.length > 0, [problems.length]);
 
   useEffect(() => {
     async function loadData() {
@@ -35,6 +37,7 @@ export default function ShowProblems({ route }) {
   return (
     <Background>
       <Title>Encomenda {formatedId}</Title>
+      {!hasData && <NoDataIndicator />}
       {loading ? (
         <ActivityIndicator size="large" color="#fff" />
       ) : (

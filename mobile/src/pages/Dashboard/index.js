@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { StatusBar } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -12,6 +12,7 @@ import api from '~/services/api';
 import Avatar from '~/components/Avatar';
 import LoadIndicator from '~/components/LoadIndicator';
 import { WhiteBackground } from '~/components/Backgrounds';
+import NoDataIndicator from '~/components/NoDataIndicator';
 import FilterOption from './FilterOption';
 import DeliveryCard from './DeliveryCard';
 
@@ -37,6 +38,8 @@ export default function Dashboard() {
   const deliveryman = useSelector((state) => state.user.profile);
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
+
+  const hasData = useMemo(() => deliveries.length > 0, [deliveries.length]);
 
   const loadDeliveries = useCallback(async () => {
     setLoading(true);
@@ -117,14 +120,18 @@ export default function Dashboard() {
               </FilterOption>
             </Filter>
           </ListHeader>
-          <List
-            data={deliveries}
-            keyExtractor={(item) => String(item.id)}
-            renderItem={({ item }) => <DeliveryCard data={item} />}
-            onEndReached={loadNextPage}
-            onEndReachedThreshold={0.1}
-            ListFooterComponent={() => (loading ? <LoadIndicator /> : null)}
-          />
+          {hasData ? (
+            <List
+              data={deliveries}
+              keyExtractor={(item) => String(item.id)}
+              renderItem={({ item }) => <DeliveryCard data={item} />}
+              onEndReached={loadNextPage}
+              onEndReachedThreshold={0.1}
+              ListFooterComponent={() => (loading ? <LoadIndicator /> : null)}
+            />
+          ) : (
+            <NoDataIndicator />
+          )}
         </Content>
       </WhiteBackground>
     </>
