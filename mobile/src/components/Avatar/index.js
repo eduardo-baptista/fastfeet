@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { Container, Text, Image } from './styles';
+import api from '~/services/api';
 
 export default function Avatar({ size, fontSize, url, name, ...rest }) {
   const getInitials = useCallback((nameToGet) => {
@@ -22,8 +23,7 @@ export default function Avatar({ size, fontSize, url, name, ...rest }) {
         <Image
           size={size}
           source={{
-            uri:
-              'http://192.168.0.100:3333/files/857c5af124a9d65af2413f01ec93bb0f.jpg',
+            uri: `${api.defaults.baseURL}/files/857c5af124a9d65af2413f01ec93bb0f.jpg`,
           }}
         />
       ) : (

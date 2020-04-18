@@ -7,11 +7,9 @@ export default function formatDelivery(delivery) {
     /(^[a-z])/,
     delivery.status[0].toUpperCase()
   );
-  delivery.start_date = delivery.start_date
-    ? formatData(delivery.start_date)
-    : '-- / -- / --';
-  delivery.end_date = delivery.end_date
-    ? formatData(delivery.end_date)
-    : '-- / -- / --';
+  if (delivery.start_date)
+    delivery.start_date = formatData(delivery.start_date);
+
+  if (delivery.end_date) delivery.end_date = formatData(delivery.end_date);
   return delivery;
 }

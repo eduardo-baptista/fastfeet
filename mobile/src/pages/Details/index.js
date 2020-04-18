@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar, ActivityIndicator } from 'react-native';
+import { StatusBar, ActivityIndicator, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 
@@ -30,14 +30,32 @@ export default function Details({ route, navigation }) {
       setLoading(true);
       const { data } = await api.get(`orders/${id}`);
 
-      console.tron.log(formatDelivery(data));
-
-      setDelivery(data);
+      setDelivery(formatDelivery(data));
 
       setLoading(false);
     }
     fetchData();
   }, [id]);
+
+  function handleConfirmDelivery() {
+    if (!delivery.start_date) {
+      Alert.alert(
+        'Encomenda não retirada',
+        'A encomenda ainda não foi retirada pelo entregador'
+      );
+      return;
+    }
+
+    if (delivery.end_date) {
+      Alert.alert(
+        'Encomenda encerrada',
+        `A encomenda foi entregue em ${delivery.end_date}`
+      );
+      return;
+    }
+
+    navigation.navigate('ConfirmDelivery', { id });
+  }
 
   return (
     <>
@@ -69,17 +87,17 @@ export default function Details({ route, navigation }) {
               <Row>
                 <Info>
                   <InfoTitle>DATA DE RETIRADA</InfoTitle>
-                  <InfoText>{delivery.start_date}</InfoText>
+                  <InfoText>{delivery.start_date || '-- / -- / --'}</InfoText>
                 </Info>
                 <Info>
                   <InfoTitle>DATA DE ENTREGA</InfoTitle>
-                  <InfoText>{delivery.end_date}</InfoText>
+                  <InfoText>{delivery.end_date || '-- / -- / --'}</InfoText>
                 </Info>
               </Row>
             </Card>
             <ActionRow>
               <ActionButton
-                onPress={() => navigation.navigate('Problem', { id })}
+                onPress={() => navigation.navigate('CreateProblem', { id })}
               >
                 <Icon name="highlight-off" size={24} color="#e74040" />
                 <ActionButtonText>Informar Problema</ActionButtonText>
@@ -92,9 +110,7 @@ export default function Details({ route, navigation }) {
                 <ActionButtonText>Visualizar Problemas</ActionButtonText>
               </ActionButton>
               <SeparatorActionButton />
-              <ActionButton
-                onPress={() => navigation.navigate('ConfirmDelivery', { id })}
-              >
+              <ActionButton onPress={handleConfirmDelivery}>
                 <Icon name="check-circle" size={24} color="#7d40e7" />
                 <ActionButtonText>Confirmar Entrega</ActionButtonText>
               </ActionButton>

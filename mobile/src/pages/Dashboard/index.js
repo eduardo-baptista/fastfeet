@@ -50,6 +50,7 @@ export default function Dashboard() {
 
   const loadNextPage = async () => {
     if (loading) return;
+    if (deliveries.length < 5) return;
     setLoading(true);
     const NextPage = page + 1;
     const response = await api.get(`deliveryman/${deliveryman.id}/deliveries`, {

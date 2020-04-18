@@ -10,7 +10,7 @@ import SignIn from '~/pages/SignIn';
 import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
 import Details from '~/pages/Details';
-import Problem from '~/pages/Problem';
+import CreateProblem from '~/pages/CreateProblem';
 import ShowProblems from '~/pages/ShowProblems';
 import ConfirmDelivery from '~/pages/ConfirmDelivery';
 
@@ -54,8 +54,8 @@ function DeliveryRoutes() {
         }}
       />
       <Stack.Screen
-        name="Problem"
-        component={Problem}
+        name="CreateProblem"
+        component={CreateProblem}
         options={{
           title: 'Informar problema',
           headerLeft: ({ onPress }) => (
