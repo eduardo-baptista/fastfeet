@@ -14,6 +14,7 @@ export default styled.div`
   height: ${(props) => props.size}px;
   border-radius: 50%;
   border: ${(props) => props.size * 0.1}px solid #fff;
-  border-color: #fff transparent #fff transparent;
+  border-color: ${(props) => props.color || '#fff'} transparent
+    ${(props) => props.color || '#fff'} transparent;
   animation: ${loaderAnimation} 1.2s linear infinite;
 `;

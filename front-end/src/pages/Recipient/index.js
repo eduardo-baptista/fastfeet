@@ -9,6 +9,7 @@ import SearchInput from '~/components/SearchInput';
 import { PrimaryButton } from '~/components/Buttons';
 import Table from '~/components/Table';
 import EmptyTableIndicator from '~/components/EmptyTableIndicator';
+import LoadingIndicator from '~/components/LoadingIndicator';
 
 import history from '~/services/history';
 import RecipientTableRow from './RecipientTableRow';
@@ -19,6 +20,8 @@ import { getDataRequest } from '~/store/modules/recipient/actions';
 
 export default function Recipient() {
   const recipients = useSelector((store) => store.recipient.recipients);
+  const loading = useSelector((store) => store.recipient.loading);
+
   const dispatch = useDispatch();
   const [filter, setFilter] = useState('');
   const hasData = useMemo(() => recipients.length > 0, [recipients]);
@@ -62,7 +65,8 @@ export default function Recipient() {
           ))}
         </tbody>
       </Table>
-      {!hasData && <EmptyTableIndicator />}
+      {loading && <LoadingIndicator />}
+      {!hasData && !loading && <EmptyTableIndicator />}
       <Route path="/destinatarios/:id/excluir" component={Delete} />
     </ContainerPage>
   );

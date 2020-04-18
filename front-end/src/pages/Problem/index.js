@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import ContainerPage from '~/components/ContainerPage';
 import Table from '~/components/Table';
 import EmptyTableIndicator from '~/components/EmptyTableIndicator';
+import LoadingIndicator from '~/components/LoadingIndicator';
 
 import ProblemTableRow from './ProblemTableRow';
 
@@ -15,6 +16,8 @@ import { getDataRequest } from '~/store/modules/problem/actions';
 
 export default function Problem() {
   const problems = useSelector((store) => store.problem.problems);
+  const loading = useSelector((store) => store.problem.loading);
+
   const dispatch = useDispatch();
   const hasData = useMemo(() => problems.length > 0, [problems]);
 
@@ -39,7 +42,8 @@ export default function Problem() {
           ))}
         </tbody>
       </Table>
-      {!hasData && <EmptyTableIndicator />}
+      {loading && <LoadingIndicator />}
+      {!hasData && !loading && <EmptyTableIndicator />}
       <Route path="/problemas/:id/visualizar" component={Show} />
       <Route path="/problemas/:id/excluir" component={Delete} />
     </ContainerPage>

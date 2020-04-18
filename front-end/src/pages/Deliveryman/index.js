@@ -9,6 +9,7 @@ import SearchInput from '~/components/SearchInput';
 import { PrimaryButton } from '~/components/Buttons';
 import Table from '~/components/Table';
 import EmptyTableIndicator from '~/components/EmptyTableIndicator';
+import LoadingIndicator from '~/components/LoadingIndicator';
 
 import history from '~/services/history';
 import DeliverymenTableRow from './DeliverymenTableRow';
@@ -19,6 +20,8 @@ import { getDataRequest } from '~/store/modules/deliveryman/actions';
 
 export default function Deliveryman() {
   const deliverymen = useSelector((store) => store.deliveryman.deliverymen);
+  const loading = useSelector((store) => store.deliveryman.loading);
+
   const dispatch = useDispatch();
   const [filter, setFilter] = useState('');
   const hasData = useMemo(() => deliverymen.length > 0, [deliverymen]);
@@ -66,7 +69,8 @@ export default function Deliveryman() {
           ))}
         </tbody>
       </Table>
-      {!hasData && <EmptyTableIndicator />}
+      {loading && <LoadingIndicator />}
+      {!hasData && !loading && <EmptyTableIndicator />}
       <Route path="/entregadores/:id/excluir" component={Delete} />
     </ContainerPage>
   );

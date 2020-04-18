@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MdRemoveRedEye, MdModeEdit, MdDeleteForever } from 'react-icons/md';
+import {
+  MdRemoveRedEye,
+  MdModeEdit,
+  MdDeleteForever,
+  MdDirectionsBike,
+} from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 import ActionCell from '~/components/ActionCell';
@@ -32,6 +37,12 @@ export default function DeliveryTableRow({ delivery }) {
         <Status>{delivery.status}</Status>
       </td>
       <ActionCell>
+        {delivery.status === 'PENDENTE' && (
+          <Link to={`/encomendas/${delivery.id}/iniciar`}>
+            <MdDirectionsBike size={15} color="#c1bc35" />
+            Iniciar Entrega
+          </Link>
+        )}
         <Link to={`/encomendas/${delivery.id}/visualizar`}>
           <MdRemoveRedEye size={15} color="#8e5be8" />
           Visualizar

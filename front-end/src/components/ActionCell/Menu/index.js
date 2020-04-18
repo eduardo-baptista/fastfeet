@@ -16,6 +16,7 @@ export default function Menu({ closeMenu, children }) {
 Menu.propTypes = {
   closeMenu: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
+    PropTypes.any,
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
   ]).isRequired,

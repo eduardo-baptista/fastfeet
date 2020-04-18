@@ -9,6 +9,7 @@ import SearchInput from '~/components/SearchInput';
 import { PrimaryButton } from '~/components/Buttons';
 import Table from '~/components/Table';
 import EmptyTableIndicator from '~/components/EmptyTableIndicator';
+import LoadingIndicator from '~/components/LoadingIndicator';
 
 import history from '~/services/history';
 
@@ -16,11 +17,12 @@ import { getDataRequest } from '~/store/modules/delivery/actions';
 // subpages
 import Show from './Show';
 import Delete from './Delete';
-
+import StartDelivery from './StartDelivery';
 import DeliveryTableRow from './DeliveryTableRow';
 
 export default function Delivery() {
   const deliveries = useSelector((store) => store.delivery.deliveries);
+  const loading = useSelector((store) => store.delivery.loading);
   const dispatch = useDispatch();
   const [filter, setFilter] = useState('');
   const hasData = useMemo(() => deliveries.length > 0, [deliveries]);
@@ -68,9 +70,11 @@ export default function Delivery() {
           ))}
         </tbody>
       </Table>
-      {!hasData && <EmptyTableIndicator />}
+      {loading && <LoadingIndicator />}
+      {!hasData && !loading && <EmptyTableIndicator />}
       <Route path="/encomendas/:id/visualizar" component={Show} />
       <Route path="/encomendas/:id/excluir" component={Delete} />
+      <Route path="/encomendas/:id/iniciar" component={StartDelivery} />
     </ContainerPage>
   );
 }

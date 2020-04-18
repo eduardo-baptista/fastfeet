@@ -30,6 +30,7 @@ export default function ActionCell({ children }) {
 
 ActionCell.propTypes = {
   children: PropTypes.oneOfType([
+    PropTypes.any,
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
   ]).isRequired,
